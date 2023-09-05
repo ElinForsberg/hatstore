@@ -1,0 +1,23 @@
+// skapa en användare
+POST http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "username": "otto karlsson",
+    "password": "otto",
+    "email": "otto_k@hotmail.com"
+    
+}
+###
+
+//logga in
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    
+    "username": "otto karlsson",
+    "password": "otto"
+    
+}
+###

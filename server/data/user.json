@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cus_Oa7GyrGs3MxrUT",
+    "username": "anna",
+    "password": "$2b$10$XPcG7a2nvRLGnH7/3EGHfu0Lscmw5RifcLb8tRf/FCXSQ8gJXzlg6",
+    "email": "anna@hotmail.com"
+  },
+  {
+    "id": "cus_Oa7KqoSOWeVrti",
+    "username": "pelle",
+    "password": "$2b$10$OMbHu1n6uxSpXwvoAPc/3Omu2AdejYAbHt4RfX8k4ZRo1/dZvj6OK",
+    "email": "pelle@hotmail.com"
+  },
+  {
+    "id": "cus_Oa7dvbhg5qKzMa",
+    "username": "otto",
+    "password": "$2b$10$yTeLHPwAiGiwqoy34cZc9uer62jN9LnCs6H8mLJOKYY/WLtVCrAFq",
+    "email": "otto@hotmail.com"
+  },
+  {
+    "id": "cus_Oa818vEgr0UPBD",
+    "username": "otto karlsson",
+    "password": "$2b$10$xz2Tkuc2efP3j8JblMCf8OrMhFUEVIs8IgV9tFeGH2wni6g1irxv2",
+    "email": "otto_k@hotmail.com"
+  }
+]
