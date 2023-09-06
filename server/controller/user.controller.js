@@ -71,7 +71,10 @@ const login = async (req, res) => {
 const passwordMatch = await bcrypt.compare(password, user.password);
 
 if(passwordMatch) {
+    req.session = user;
+    console.log("req",req.session);
     res.json({message: "login successful", user: {username: user.username, email: user.email}});
+    
 } else {
     res.status(401).json({message: "Authentication failed. Incorrect password."})
 }

@@ -3,9 +3,9 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-    "username": "otto karlsson",
-    "password": "otto",
-    "email": "otto_k@hotmail.com"
+    "username": "nisse",
+    "password": "nisse",
+    "email": "ni@hotmail.com"
     
 }
 ###
@@ -16,8 +16,13 @@ Content-Type: application/json
 
 {
     
-    "username": "otto karlsson",
+    "username": "otto karson",
     "password": "otto"
     
 }
+###
+
+//hämta alla produkter
+GET http://localhost:3000/api/products
+
 ###

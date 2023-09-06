@@ -1,41 +1,18 @@
-import { useState } from "react";
+
+import ProductList from "./ProductList";
+import { useProductContext } from "../context/ProductContext";
 
 
 function Home() {
-const [cart, setCart] = useState(
-    [
-        {
-        product: "price_1NmZeuApvy7495PLOwpFBANi",
-        quantity: 2,
-    },
-    ]
-) 
 
-    async function handlePayment() {
-     
-        const response = await fetch(
-        "http://localhost:3000/create-checkout-session", 
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(cart),
-        }
-        );
-  
-        if (!response.ok) {
-          // Handle the response here
-          return;
-        }
-      const { url } = await response.json();
-      window.location = url;
+  const {  handlePayment } = useProductContext();
 
-    } 
+
 
   return (
     <div>
-        <div>home</div>
+        <div>Welcome to HatStore</div>
+        <ProductList/>
         <button onClick={handlePayment}>Pay me </button>
     </div>
   );
