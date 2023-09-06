@@ -34,5 +34,11 @@
     "username": "anna anka",
     "password": "$2b$10$BCp6NyJrdEosOLfGcuY59.utXKoR275kU9dp7LD49HDJ1YNBVrQLy",
     "email": "anna_anka@hotmail.com"
+  },
+  {
+    "id": "cus_OaYfj6HJdPnjiV",
+    "username": "Sigge",
+    "password": "$2b$10$evGmJwlVJ3xjYRXXRCUj4uB4/Z7hEorX9xEF.eEA4RiwBBYe/16i.",
+    "email": "sigge@hotmail.com"
   }
 ]

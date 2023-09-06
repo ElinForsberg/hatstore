@@ -85,4 +85,12 @@ if(passwordMatch) {
     }
 }
 
-module.exports = {registerUser, login}
+async function authorize(req, res) {
+    if (!req.session.id) {
+      return res.status(401).json("You are not logged in");
+    }
+    return req.session,
+    res.status(200).json(req.session);
+  }
+
+module.exports = {registerUser, login, authorize}

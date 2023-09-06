@@ -1,4 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
+import { useUser } from "./UserContext";
+
 
 interface IProductContext {
     products: ProductData[];
@@ -53,7 +55,7 @@ export const useProductContext = () => useContext(ProductContext);
 const ProductProvider = ({children}: PropsWithChildren) => {
     const [products, setProducts] = useState<ProductData[]>([]);
     const [cart, setCart] = useState<CartItem[]>([]);
-
+    const { loggedInUser } = useUser()
     async function listProducts() {
         
         try {
@@ -94,24 +96,29 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     }, []);
 
     async function handlePayment() {
-     
-        const response = await fetch(
-        "http://localhost:3000/api/create-checkout-session", 
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(cart),
+        if(loggedInUser){
+            const response = await fetch(
+                "http://localhost:3000/api/create-checkout-session", 
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(cart),
+                }
+                );
+          
+                if (!response.ok) {
+                  // Handle the response here
+                  return;
+                }
+              const { url } = await response.json();
+              window.location = url;
+        } else {
+            console.log("you are not logged in");
+            
         }
-        );
-  
-        if (!response.ok) {
-          // Handle the response here
-          return;
-        }
-      const { url } = await response.json();
-      window.location = url;
+    
 
     };
 
