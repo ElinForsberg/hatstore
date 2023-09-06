@@ -22,5 +22,17 @@
     "username": "otto karlsson",
     "password": "$2b$10$xz2Tkuc2efP3j8JblMCf8OrMhFUEVIs8IgV9tFeGH2wni6g1irxv2",
     "email": "otto_k@hotmail.com"
+  },
+  {
+    "id": "cus_OaTBt14ClYiAIh",
+    "username": "nisse",
+    "password": "$2b$10$YMdBtcJ1ZN1hIMlw2eKl7uQrr1k7OEwMj9RpNq5Sfdv9r/IgHBAfe",
+    "email": "ni@hotmail.com"
+  },
+  {
+    "id": "cus_OaWVfcSp7fnKwQ",
+    "username": "anna anka",
+    "password": "$2b$10$BCp6NyJrdEosOLfGcuY59.utXKoR275kU9dp7LD49HDJ1YNBVrQLy",
+    "email": "anna_anka@hotmail.com"
   }
 ]

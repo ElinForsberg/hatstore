@@ -6,7 +6,7 @@ const CLIENT_URL = "http://127.0.0.1:5173";
 const getProducts = async (req,res) => {
     try {
         const products= await stripe.products.list({
-            // limit: 10,
+            limit: 10,
             expand: ["data.default_price"],
          });
          res.status(200).json(products)

@@ -63,7 +63,7 @@ const login = async (req, res) => {
         const fileData = fs.readFileSync(filePath, "utf8");
         const userData = JSON.parse(fileData);
     
-    const user = userData.find((user) => user.username === username || user.email === username);
+        const user = userData.find((user) => user.username === username || user.email === username);
         if(!user) {
             return res.status(404).json({message: "user not found"});
         }

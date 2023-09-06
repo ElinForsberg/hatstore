@@ -15,9 +15,9 @@ const { products,  addToCart, cart } = useProductContext();
           <li key={index}>
             <h2>{product.name}</h2>
             <p>{product.description}</p>
-            <p>Price: {product.product}</p>
+            <p>Price: {product.price.unit_amount} {product.price.currency}</p>
             <img src={product.image} alt={product.name} />
-            <button onClick={() => addToCart(product)}>Add to cart</button>
+            <button onClick={() => addToCart(product.price.id)}>Add to cart</button>
             
           </li>
         ))}
@@ -28,7 +28,7 @@ const { products,  addToCart, cart } = useProductContext();
             <li key= {index}>
                 
                 <p>Quantity: {cartItem.quantity}</p>
-                <p>Product: {cartItem.product}</p>
+                {/* <p>Product: {cartItem.product}</p> */}
             </li>
         ))}
       </ul>

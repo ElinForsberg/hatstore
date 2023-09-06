@@ -7,22 +7,31 @@ interface IProductContext {
     cart: CartItem[];
     setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     handlePayment: () => void;
-    addToCart: (product: ProductData) => void;
+    addToCart: (product: string) => void;
 }
 
 interface ProductData {
     name: string;
-    default_price: string;
+    default_price: ProductPrice;
     description: string;
     images: string;
     image: string;
     id:string;
-    product: string;
+    product:string;
+    price: ProductPrice;
+    
+}
+
+interface ProductPrice {
+    currency: string;
+    unit_amount: string;
+    id: string;
 }
 
 interface CartItem {
     product: string;
     quantity: number;
+   
     
 }
 
@@ -35,6 +44,8 @@ const defaultValues = {
     setCart: () => [],
     addToCart: () => {}
 }
+
+
 
 const ProductContext = createContext<IProductContext>(defaultValues);
 export const useProductContext = () => useContext(ProductContext);
@@ -56,10 +67,19 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                     description: product.description,
                     product: product.default_price,
                     image: product.images[0],
-                    id: product.id 
+                    id: product.id,
+                    price: {
+                        currency: product.default_price.currency,
+                        unit_amount: (parseFloat(product.default_price.unit_amount) / 100).toFixed(2),
+                        id: product.default_price.id
+                    }
                 }));
+               
+               
                 setProducts(mappedProducts);
                 console.log(data);
+                console.log(mappedProducts);
+                
                
         }catch(err){
             console.log(err);
@@ -95,15 +115,15 @@ const ProductProvider = ({children}: PropsWithChildren) => {
 
     };
 
-    function addToCart(product: ProductData) {
+    function addToCart(productId: string) {
         // Check if the product is already in the cart
-        const existingCartItem = cart.find((item) => item.product === product.product);
+        const existingCartItem = cart.find((item) => item.product === productId);
 
         if (existingCartItem) {
             // If the product is already in the cart, update its quantity
             setCart((prevCart) =>
                 prevCart.map((item) =>
-                    item.product === product.product
+                    item.product === productId
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
                 )
@@ -117,8 +137,8 @@ const ProductProvider = ({children}: PropsWithChildren) => {
             setCart((prevCart) => [
                 ...prevCart,
                 {
-                
-                    product: product.product,
+                    product: productId,
+                    
                     quantity: 1, // Initialize with a quantity of 1
                 },
                 
@@ -128,6 +148,8 @@ const ProductProvider = ({children}: PropsWithChildren) => {
             
         }
     }
+
+   
 
 
 
