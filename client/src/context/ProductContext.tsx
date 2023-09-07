@@ -9,7 +9,7 @@ interface IProductContext {
     cart: CartItem[];
     setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     handlePayment: () => void;
-    addToCart: (product: string) => void;
+    addToCart: (productId: string, productName: string, productImage: string, productPrice: string, ProductCurrency: string) => void;
 }
 
 interface ProductData {
@@ -33,8 +33,10 @@ interface ProductPrice {
 interface CartItem {
     product: string;
     quantity: number;
-   
-    
+    name: string;
+    price: string;
+    currency: string;
+    image: string;  
 }
 
 const defaultValues = {
@@ -122,7 +124,7 @@ const ProductProvider = ({children}: PropsWithChildren) => {
 
     };
 
-    function addToCart(productId: string) {
+    function addToCart(productId: string, productName: string, productImage: string, productPrice: string, productCurrency: string) {
         // Check if the product is already in the cart
         const existingCartItem = cart.find((item) => item.product === productId);
 
@@ -147,6 +149,14 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                     product: productId,
                     
                     quantity: 1, // Initialize with a quantity of 1
+
+                    name: productName,
+
+                    image: productImage,
+
+                    price: productPrice,
+
+                    currency: productCurrency
                 },
                 
                 

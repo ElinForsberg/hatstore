@@ -1,19 +1,20 @@
 
 import ProductList from "./ProductList";
 import { useProductContext } from "../context/ProductContext";
+import Header from "./Header/Header";
 
 
 function Home() {
 
-  const {  handlePayment } = useProductContext();
+  
 
 
 
   return (
     <div>
-        <div>Welcome to HatStore</div>
+        <Header/>
         <ProductList/>
-        <button onClick={handlePayment}>Pay me </button>
+        {/* <button onClick={handlePayment}>Pay me </button> */}
     </div>
   );
   }

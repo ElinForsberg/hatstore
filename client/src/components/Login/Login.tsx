@@ -1,5 +1,6 @@
 import  { useState } from 'react'
-import { UserType, useUser, RegisterUser } from '../context/UserContext';
+import { UserType, useUser, RegisterUser } from '../../context/UserContext';
+import "./Login.css";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -40,22 +41,42 @@ function Login() {
 
   return (
     <div>
-     <h1>Login</h1>  
+      
      {/* <form>
         <input placeholder="username" value= {username} onChange= {(e) => setUsername(e.target.value)}/>
         <input placeholder="password" value= {password} onChange= {(e) => setPassword(e.target.value)}/>
         <button onClick={handleLogin}>SignIn</button>
     </form>  */}
-       <Box
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: 20
+      }}
+      >
+    <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
+       width: 300,
+       height: 400,
+       display:"flex",
+       flexDirection: "column",
+       alignItems:"center",
+       justifyContent: "center",
+       paddingTop: 10,
+       paddingBottom: 10,
+       border: "2px solid black",
+       borderRadius: 2,
+       marginLeft: 10,
+       
+
       }}
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Username" variant="outlined" value= {username} onChange= {(e) => setUsername(e.target.value)}/>
-      <TextField id="outlined-basic" label="Password" variant="outlined" value= {password} onChange= {(e) => setPassword(e.target.value)}/>
+      <h3>Login</h3> 
+      <TextField id="outlined-basic" label="Username" variant="outlined"  onChange= {(e) => setUsername(e.target.value)}/>
+      <TextField id="outlined-basic" label="Password" variant="outlined"  onChange= {(e) => setPassword(e.target.value)}/>
       <Button variant="outlined" onClick={handleLogin}>LogIn</Button>
     </Box>
      
@@ -67,17 +88,32 @@ function Login() {
     </form>  */}
      <Box
       component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
+        sx={{
+          width: 300,
+          height: 400,
+          display:"flex",
+          flexDirection: "column",
+          alignItems:"center",
+          justifyContent: "center",
+          paddingTop: 10,
+          paddingBottom: 10,
+          border: "2px solid black",
+          borderRadius: 2,
+          marginRight: 10
+          
+         }}
+    
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Username" variant="outlined" value= {username} onChange= {(e) => setUsername(e.target.value)}/>
-      <TextField id="outlined-basic" label="Email" variant="outlined" value= {email} onChange= {(e) => setEmail(e.target.value)}/>
-      <TextField id="outlined-basic" label="Password" variant="outlined" value= {password} onChange= {(e) => setPassword(e.target.value)}/>
+      <h3>Register</h3> 
+      <TextField id="outlined-basic" label="Username" variant="outlined"  onChange= {(e) => setUsername(e.target.value)}/>
+      <TextField id="outlined-basic" label="Email" variant="outlined"   onChange= {(e) => setEmail(e.target.value)}/>
+      <TextField id="outlined-basic" label="Password" variant="outlined"  onChange= {(e) => setPassword(e.target.value)}/>
       <Button variant="outlined" onClick={handleRegisterUser}>Register new User</Button>
     </Box>
+    </Box>
+      
     
     </div>
   )
