@@ -40,14 +40,20 @@ function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
       <ul>
         {cart.map((cartItem, index) => (
             <div className="cartItem" key= {index}>
-              
-                <p>{cartItem.name}</p>
-                <p>Quantity: {cartItem.quantity}</p>
+                <div className="itemWrapper">
+                  <p>{cartItem.name}</p>
+                </div>
+                <div className="itemWrapper">
+                  <p>Quantity: {cartItem.quantity}</p>
+                </div>
+                
                 <div className="imgContainer">
                   <img src={cartItem.image} className="cartImg"/>
                 </div>
+                <div className="itemWrapper">
+                  <p>Price: {cartItem.price} {cartItem.currency}</p>
+                </div>
                 
-                <p>Price: {cartItem.price} {cartItem.currency}</p>
                 
             </div>
         ))}
