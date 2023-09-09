@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import MyDrawer from "../MyDrawer/MyDrawer";
-
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Header() {
     const [open, setOpen] = useState(false);
@@ -17,16 +17,27 @@ function Header() {
         setOpen(false);
       };
   return (
-    <div>
-        <h1>Welcome to HatStore</h1>
-        <Button variant="outlined" onClick={open ? handleClose : handleOpen} >
-        ShoppingCart
-        <ShoppingCart className="shopping-cart-icon" />
-        <MyDrawer open={open} setOpen={setOpen} />
-        </Button>
-        <Link to= "/login">
-        <Button variant="outlined">LogIn /Register</Button>
-        </Link>
+    <div className="headerContainer">
+        <div className="logoWrapper">
+            <h1>Welcome to HatStore</h1>
+            
+             
+          
+            {/* <FontAwesomeIcon icon={faRedhat} style={{color: "#01060e",}} />      */}
+            
+        </div>
+        <div className="btnWrapper">
+            <Button variant="outlined" onClick={open ? handleClose : handleOpen} >
+                ShoppingCart
+                <ShoppingCart className="shopping-cart-icon" />
+                <MyDrawer open={open} setOpen={setOpen} />
+            </Button>
+            <Link to= "/login">
+                <Button variant="outlined">LogIn /Register</Button>
+            </Link>
+        </div>
+        
+        
     </div>
   )
 }

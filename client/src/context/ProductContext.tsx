@@ -6,6 +6,7 @@ interface IProductContext {
     products: ProductData[];
     setProducts: React.Dispatch<React.SetStateAction<ProductData[]>>;
     listProducts: () => void;
+    useCupon: () => void;
     cart: CartItem[];
     setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     handlePayment: () => void;
@@ -36,7 +37,8 @@ interface CartItem {
     name: string;
     price: string;
     currency: string;
-    image: string;  
+    image: string;
+   
 }
 
 const defaultValues = {
@@ -46,7 +48,8 @@ const defaultValues = {
     handlePayment: () => {},
     cart: [],
     setCart: () => [],
-    addToCart: () => {}
+    addToCart: () => {},
+    useCupon: () => {}
 }
 
 
@@ -106,7 +109,7 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: JSON.stringify(cart),
+                  body: JSON.stringify(cart ),
                 }
                 );
           
@@ -156,7 +159,9 @@ const ProductProvider = ({children}: PropsWithChildren) => {
 
                     price: productPrice,
 
-                    currency: productCurrency
+                    currency: productCurrency,
+
+                   
                 },
                 
                 
@@ -167,8 +172,33 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     }
 
    
+    async function useCupon () {
+        try {
+            
+                const response = await fetch(
+                    "http://localhost:3000/api/create-checkout-session/coupon"
+                );
+                    const data = await response.json();
+                    if (response.status === 200 || response.status === 304) {
+                            // setCupon(data);
+                            console.log(data);
+                            
+        
+    }  
+     }     catch (err) {
+          console.log(err);
+        }
+    }
 
+    // if (response.status === 200 || response.status === 304) {
+    //     setLoggedInUser(data);
+    //     console.log(data);
+        
+    //   }
 
+    // } catch (err) {
+    //   console.log(err);
+    // }
 
 return (
     <ProductContext.Provider
@@ -179,7 +209,8 @@ return (
         cart,
         setCart,
         handlePayment,
-        addToCart
+        addToCart,
+        useCupon
         
     }}
     >

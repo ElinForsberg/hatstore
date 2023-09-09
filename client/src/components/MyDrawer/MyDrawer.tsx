@@ -13,7 +13,8 @@ interface ShoppingDrawerProps {
 
 
 function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
-  const {  cart } = useProductContext();
+  
+  const {  cart, handlePayment } = useProductContext();
 
   const toggleDrawer = () => (event: { type: string; key: string; }) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -38,7 +39,7 @@ function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
         {cart.map((cartItem, index) => (
             <div className="cartItem" key= {index}>
               
-                <p>Name: {cartItem.name}</p>
+                <p>{cartItem.name}</p>
                 <p>Quantity: {cartItem.quantity}</p>
                 <div className="imgContainer">
                   <img src={cartItem.image} className="cartImg"/>
@@ -49,6 +50,7 @@ function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
             </div>
         ))}
       </ul>
+      <Button className="cartBtn" variant="outlined" onClick={handlePayment}> Go to Checkout </Button>
       </div>
        
   

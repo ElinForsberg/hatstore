@@ -51,6 +51,8 @@ const UserProvider = ({children}: PropsWithChildren) => {
             const data = await response.json();
             if (response.status === 200 || response.status === 304) {
               setLoggedInUser(data);
+              console.log(data);
+              
             }
      
           } catch (err) {

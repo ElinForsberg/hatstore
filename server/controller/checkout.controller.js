@@ -11,7 +11,7 @@ const registerCheckout = async (req,res) => {
         try {
             const session = await stripe.checkout.sessions.create({
                 
-                line_items: req.body.map((item) => {
+                line_items: req.body.map((item, customer) => {
     
                     return {
                         price: item.product,
@@ -20,7 +20,7 @@ const registerCheckout = async (req,res) => {
                     };
                     
                 }),
-    
+                
                 customer: req.session.id,
                 mode: "payment",
                 success_url: `${CLIENT_URL}/confirmation`,
@@ -38,8 +38,21 @@ const registerCheckout = async (req,res) => {
     }
    
 
+    const getCoupon = async (req,res) => {
+        try {
+        const stripe = require('stripe')('sk_test_51NmZRIApvy7495PL1RTKWd4bOv1TZdrTHuH0IBefwXM3FL3x6hOuvNEMFzGzRqQCsbDKoHp90XdZDvjKu4qYZpp800EwDdFWB7');
+
+        const coupon = await stripe.coupons.retrieve(
+        'FALL23'
+        );
+    
+        res.status(200).json(coupon);
+        } catch(err){
+        console.log(err);
+        res.status(400).json("something went wrong")
+    }
+    }
 
 
 
-
-module.exports = {registerCheckout}
+module.exports = {registerCheckout, getCoupon}

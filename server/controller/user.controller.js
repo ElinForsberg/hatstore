@@ -91,6 +91,7 @@ async function authorize(req, res) {
     }
     return req.session,
     res.status(200).json(req.session);
+    
   }
 
 module.exports = {registerUser, login, authorize}
