@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../../context/ProductContext";
+import { useUser } from "../../context/UserContext";
 
 interface ShoppingDrawerProps {
   open: boolean;
@@ -15,6 +16,7 @@ interface ShoppingDrawerProps {
 function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
   
   const {  cart, handlePayment } = useProductContext();
+  const { loggedInUser } = useUser();
 
   const toggleDrawer = () => (event: { type: string; key: string; }) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -50,7 +52,23 @@ function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
             </div>
         ))}
       </ul>
-      <Button className="cartBtn" variant="outlined" onClick={handlePayment}> Go to Checkout </Button>
+      {!loggedInUser &&
+          <div className="loginContainer">
+            <div>
+            You need to log in to proceed to checkout!!
+            </div>
+            <Link to="/login">
+            <Button>LogIn</Button>
+            </Link>
+          </div>
+
+      }
+      {loggedInUser &&
+        <div className="loginContainer">
+          <Button className="cartBtn" variant="outlined" onClick={handlePayment}> Go to Checkout </Button>
+        </div>
+      }
+      
       </div>
        
   

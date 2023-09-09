@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Header from '../Header/Header';
+import { Link } from 'react-router-dom';
 
 
 function Login() {
@@ -43,12 +44,22 @@ function Login() {
   return (
     <div>
     <Header/>
-     
+    {loggedInUser &&
+      <Box sx={{height: 100, display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop: 5}}>
+        <h2>
+        You are succesfully logged in!
+        </h2>
+        <Link to = "/">
+          <Button>Go shopping</Button>
+        </Link>
+       
+      </Box>
+    }
     <Box
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        marginTop: 10
+        marginTop: 5
       }}
       >
     <Box
@@ -76,12 +87,14 @@ function Login() {
       <h3>Login</h3> 
       <TextField id="outlined-basic" 
       label="Username" 
-      variant="outlined"  
+      variant="outlined"
+      value={username}  
       onChange= {(e) => setUsername(e.target.value)}
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
-      label="Password" variant="outlined"  
+      label="Password" variant="outlined" 
+      value={password}  
       onChange= {(e) => setPassword(e.target.value)}
       sx={{marginBottom: 5}}
       />
@@ -120,29 +133,28 @@ function Login() {
       <TextField id="outlined-basic" 
       label="Username" 
       variant="outlined"  
+      value={username} 
       onChange= {(e) => setUsername(e.target.value)}
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
       label="Email" 
-      variant="outlined"  
+      variant="outlined"
+      value={email}   
        onChange= {(e) => setEmail(e.target.value)}
        sx={{marginBottom: 5}}
        />
       <TextField id="outlined-basic" 
       label="Password" 
       variant="outlined"  
+      value={password} 
       onChange= {(e) => setPassword(e.target.value)}
       sx={{marginBottom: 5}}
       />
       <Button variant="outlined" onClick={handleRegisterUser}>Register new User</Button>
     </Box>
     </Box>
-    {loggedInUser &&
-      <div>
-        You are succesfully logged in!
-      </div>
-    }
+   
     
     </div>
   )

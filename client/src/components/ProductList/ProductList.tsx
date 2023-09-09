@@ -18,7 +18,7 @@ const { products,  addToCart, useCupon } = useProductContext();
 
   return (
     <div className="cardContainer">
-      <div >
+      <div className="cardWrapper">
       {products.map((product, index) => (
          <Card key= {index}sx={{ width: 320, marginBottom: "30px", boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }} >
          
@@ -60,8 +60,8 @@ const { products,  addToCart, useCupon } = useProductContext();
     ))}
     </div>
         
-      <Button onClick={useCupon}></Button>
-  </div>
+      {/* <Button onClick={useCupon}></Button> */}
+  </div> 
    
   )
 }
