@@ -58,12 +58,12 @@ const registerUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     try {
         const fileData = fs.readFileSync(filePath, "utf8");
         const userData = JSON.parse(fileData);
     
-        const user = userData.find((user) => user.username === username || user.email === username);
+        const user = userData.find((user) => user.email=== email);
         if(!user) {
             return res.status(404).json({message: "user not found"});
         }

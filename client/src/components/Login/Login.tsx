@@ -18,10 +18,10 @@ function Login() {
     async function handleLogin (e: { preventDefault: () => void; }) {
         e.preventDefault()
         const user: UserType = {
-            username,
+            email,
             password
         }
-        setUsername("");
+        setEmail("");
         setPassword("");
     
         await login(user)
@@ -86,10 +86,10 @@ function Login() {
     >
       <h3>Login</h3> 
       <TextField id="outlined-basic" 
-      label="Username" 
+      label="Email" 
       variant="outlined"
-      value={username}  
-      onChange= {(e) => setUsername(e.target.value)}
+      value={email}  
+      onChange= {(e) => setEmail(e.target.value)}
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
