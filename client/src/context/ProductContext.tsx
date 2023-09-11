@@ -1,12 +1,12 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
-import { useUser } from "./UserContext";
+import { useUser} from "./UserContext";
 
 
 interface IProductContext {
     products: ProductData[];
     setProducts: React.Dispatch<React.SetStateAction<ProductData[]>>;
     listProducts: () => void;
-    useCupon: () => void;
+    
     cart: CartItem[];
     setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     handlePayment: () => void;
@@ -38,6 +38,8 @@ interface CartItem {
     price: string;
     currency: string;
     image: string;
+    // customer: string;
+   
    
 }
 
@@ -49,7 +51,7 @@ const defaultValues = {
     cart: [],
     setCart: () => [],
     addToCart: () => {},
-    useCupon: () => {}
+    
 }
 
 
@@ -103,18 +105,18 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     async function handlePayment() {
         if(loggedInUser){
             const response = await fetch(
-                "http://localhost:3000/api/create-checkout-session", 
+                "/api/create-checkout-session", 
                 {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: JSON.stringify(cart ),
+                  body: JSON.stringify(cart),
                 }
                 );
           
                 if (!response.ok) {
-                  // Handle the response here
+                  
                   return;
                 }
               const { url } = await response.json();
@@ -146,22 +148,17 @@ const ProductProvider = ({children}: PropsWithChildren) => {
             
         } else {
             // If the product is not in the cart, add it as a new item
+            // const customer = loggedInUser?.id
+               
             setCart((prevCart) => [
                 ...prevCart,
                 {
-                    product: productId,
-                    
+                    product: productId,   
                     quantity: 1, // Initialize with a quantity of 1
-
                     name: productName,
-
                     image: productImage,
-
                     price: productPrice,
-
-                    currency: productCurrency,
-
-                   
+                    currency: productCurrency,   
                 },
                 
                 
@@ -171,34 +168,7 @@ const ProductProvider = ({children}: PropsWithChildren) => {
         }
     }
 
-   
-    async function useCupon () {
-        try {
-            
-                const response = await fetch(
-                    "http://localhost:3000/api/create-checkout-session/coupon"
-                );
-                    const data = await response.json();
-                    if (response.status === 200 || response.status === 304) {
-                            // setCupon(data);
-                            console.log(data);
-                            
-        
-    }  
-     }     catch (err) {
-          console.log(err);
-        }
-    }
 
-    // if (response.status === 200 || response.status === 304) {
-    //     setLoggedInUser(data);
-    //     console.log(data);
-        
-    //   }
-
-    // } catch (err) {
-    //   console.log(err);
-    // }
 
 return (
     <ProductContext.Provider
@@ -210,7 +180,7 @@ return (
         setCart,
         handlePayment,
         addToCart,
-        useCupon
+        
         
     }}
     >
