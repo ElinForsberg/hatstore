@@ -6,19 +6,22 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import "./ProductList.css"
+import { useUser } from "../../context/UserContext";
 
 
 
 function ProductList() {
  
-const { products,  addToCart, useCupon } = useProductContext();
+const { products,  addToCart,  } = useProductContext();
 
 
 
 
   return (
     <div className="cardContainer">
-      <div className="cardWrapper">
+      
+      <div className="cardWrapper"> 
+        
       {products.map((product, index) => (
          <Card key= {index}sx={{ width: 320, marginBottom: "30px", boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }} >
          
@@ -60,7 +63,7 @@ const { products,  addToCart, useCupon } = useProductContext();
     ))}
     </div>
         
-      {/* <Button onClick={useCupon}></Button> */}
+     
   </div> 
    
   )

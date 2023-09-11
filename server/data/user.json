@@ -40,5 +40,11 @@
     "username": "Sigge",
     "password": "$2b$10$evGmJwlVJ3xjYRXXRCUj4uB4/Z7hEorX9xEF.eEA4RiwBBYe/16i.",
     "email": "sigge@hotmail.com"
+  },
+  {
+    "id": "cus_OcNWlElosuFeKP",
+    "username": "Test",
+    "password": "$2b$10$7QCPd1VM74sK69LY/YCZzOVidj2cju0YdRuFUZ1LRor9UYEoLbQyK",
+    "email": "test@hotmai.com"
   }
 ]

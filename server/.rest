@@ -16,8 +16,8 @@ Content-Type: application/json
 
 {
     
-    "username": "nisse",
-    "password": "nisse"
+    "email": "anna@hotmail.com",
+    "password": "anna"
     
 }
 ###
@@ -28,3 +28,7 @@ GET http://localhost:3000/api/products
 ###
 
 GET http://localhost:3000/api/user/authorize
+###
+
+GET http://localhost:3000/api/create-checkout-session/coupon
+###
