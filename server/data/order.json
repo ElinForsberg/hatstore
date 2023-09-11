@@ -1,0 +1,56 @@
+[
+  {
+    "created": "2023-09-11T18:53:14.000Z",
+    "customer": "Test",
+    "products": [
+      {
+        "description": "STETSON YUTAN TRAVELLER WOOLFELT",
+        "quantity": 2,
+        "price": 1299,
+        "currency": "sek"
+      }
+    ]
+  },
+  {
+    "created": "2023-09-11T18:56:46.000Z",
+    "customer": "Test",
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": 699,
+        "currency": "sek"
+      },
+      {
+        "description": "BRIXTON JOANNA RANCHER",
+        "quantity": 1,
+        "price": 1249,
+        "currency": "sek"
+      }
+    ]
+  },
+  {
+    "created": "2023-09-11T18:58:39.000Z",
+    "customer": "anna",
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": 699,
+        "currency": "sek"
+      },
+      {
+        "description": "STETSON ARIPEKA",
+        "quantity": 1,
+        "price": 1449,
+        "currency": "sek"
+      },
+      {
+        "description": "STETSON YUTAN TRAVELLER WOOLFELT",
+        "quantity": 1,
+        "price": 1299,
+        "currency": "sek"
+      }
+    ]
+  }
+]

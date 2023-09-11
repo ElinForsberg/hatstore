@@ -18,12 +18,16 @@ function Header() {
         setOpen(false);
       };
   return (
-    <div className="headerContainer">
-        <div className="logoWrapper">
-            <h1>Welcome to HatStore</h1>
+    <>
+        <div className="promo">
+            <div>JUST NU!! Få 20% rabatt, använda koden FALL23</div>
+        </div>
+        <div className="headerContainer">
+    
+            <div className="logoWrapper">
             
-             
-          
+            <h1>Welcome to HatStore</h1>
+                
             {/* <FontAwesomeIcon icon={faRedhat} style={{color: "#01060e",}} />      */}
             
         </div>
@@ -45,6 +49,7 @@ function Header() {
         
         
     </div>
+    </>
   )
 }
 

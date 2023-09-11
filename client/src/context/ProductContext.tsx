@@ -67,7 +67,7 @@ const ProductProvider = ({children}: PropsWithChildren) => {
         
         try {
             const response = await fetch(
-                "http://localhost:3000/api/products"
+                "/api/products"
             );
                 const data = await response.json();
                 
@@ -119,7 +119,8 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                   
                   return;
                 }
-              const { url } = await response.json();
+              const { url, sessionId } = await response.json();
+              localStorage.setItem("session-id", sessionId);
               window.location = url;
         } else {
             console.log("you are not logged in");
