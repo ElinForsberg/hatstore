@@ -28,15 +28,24 @@
 
 .logoWrapper {
     margin-left: 15px;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa';
+   
 
 }
 
 .btnWrapper {
     display: flex;
     justify-content: space-between;
-    width: 350px;
+    width: 320px;
     margin-right: 15px;
 
 }
+
+@media (max-width: 1000px) {
+    .btnWrapper {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
 

@@ -7,6 +7,7 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import "./ProductList.css"
 import { useUser } from "../../context/UserContext";
+import { Grid } from "@mui/material";
 
 
 
@@ -20,8 +21,8 @@ const { products,  addToCart,  } = useProductContext();
   return (
     <div className="cardContainer">
       
-      <div className="cardWrapper"> 
-        
+      {/* <div className="cardWrapper">  */}
+      <Grid container columns={2} gap={3} direction="row" justifyContent="center" alignItems="center">
       {products.map((product, index) => (
          <Card key= {index}sx={{ width: 320, marginBottom: "30px", boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" }} >
          
@@ -51,7 +52,6 @@ const { products,  addToCart,  } = useProductContext();
           variant="solid"
           size="md"
           color="primary"
-          aria-label="Explore Bahamas Islands"
           sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
           onClick={() => addToCart(product.price.id, product.name, product.image, product.price.unit_amount, product.price.currency)}
         >
@@ -61,10 +61,12 @@ const { products,  addToCart,  } = useProductContext();
        
     </Card>
     ))}
+      </Grid>  
+      
     </div>
         
      
-  </div> 
+  // </div> 
    
   )
 }

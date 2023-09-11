@@ -44,6 +44,7 @@ function Login() {
   return (
     <div>
     <Header/>
+   
     {loggedInUser &&
       <Box sx={{height: 100, display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop: 5}}>
         <h2>
@@ -55,14 +56,14 @@ function Login() {
        
       </Box>
     }
-    <Box
+    <Box className="boxContainer"
       sx={{
         display: "flex",
         justifyContent: "space-around",
         marginTop: 5
       }}
       >
-    <Box
+    <Box className="leftBox"
       component="form"
       sx={{
        width: 400,
@@ -75,7 +76,7 @@ function Login() {
        paddingBottom: 10,
        border: "1px solid black",
        borderRadius: 2,
-       marginLeft: 10,
+      //  marginLeft: 10,
        backgroundColor: "white",
        boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" 
        
@@ -86,14 +87,19 @@ function Login() {
     >
       <h3>Login</h3> 
       <TextField id="outlined-basic" 
+      required
       label="Email" 
       variant="outlined"
       value={email}  
+      
       onChange= {(e) => setEmail(e.target.value)}
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
-      label="Password" variant="outlined" 
+      required
+      label="Password" 
+      type= "password"
+      variant="outlined" 
       value={password}  
       onChange= {(e) => setPassword(e.target.value)}
       sx={{marginBottom: 5}}
@@ -107,7 +113,7 @@ function Login() {
     </Box>
      
    
-     <Box
+     <Box className="rightBox"
       component="form"
         sx={{
           width: 400,
@@ -120,7 +126,7 @@ function Login() {
           paddingBottom: 10,
           border: "1px solid black",
           borderRadius: 2,
-          marginRight: 10,
+          // marginRight: 10,
           backgroundColor: "white",
           boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" 
           
@@ -131,6 +137,7 @@ function Login() {
     >
       <h3>Register</h3> 
       <TextField id="outlined-basic" 
+      required
       label="Username" 
       variant="outlined"  
       value={username} 
@@ -138,6 +145,7 @@ function Login() {
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
+      required
       label="Email" 
       variant="outlined"
       value={email}   
@@ -145,7 +153,9 @@ function Login() {
        sx={{marginBottom: 5}}
        />
       <TextField id="outlined-basic" 
+      required
       label="Password" 
+      type= "password"
       variant="outlined"  
       value={password} 
       onChange= {(e) => setPassword(e.target.value)}

@@ -25,8 +25,10 @@ function Header() {
         <div className="headerContainer">
     
             <div className="logoWrapper">
+            {/* <Link to="/"> */}
+                <h1 className="logo">Welcome to HatStore</h1>
+            {/* </Link> */}
             
-            <h1>Welcome to HatStore</h1>
                 
             {/* <FontAwesomeIcon icon={faRedhat} style={{color: "#01060e",}} />      */}
             
@@ -34,13 +36,13 @@ function Header() {
         <div className="btnWrapper">
         {!loggedInUser &&
             <Link to= "/login">
-                <Button variant="outlined">LogIn /Register</Button>
+                <Button variant="outlined" size="small" sx={{width:"150px"}}>LogIn /Register</Button>
             </Link>
             }
         { loggedInUser &&
-            <Button variant="outlined" sx={{marginLeft:5}}> LogOut </Button>
+            <Button variant="outlined" size="small" sx={{marginLeft:5}}> LogOut </Button>
         }    
-            <Button variant="outlined" onClick={open ? handleClose : handleOpen} >
+            <Button variant="outlined" size="small" sx={{width:"150px"}} onClick={open ? handleClose : handleOpen} >
                 ShoppingCart
                 <ShoppingCart className="shopping-cart-icon" />
                 <MyDrawer open={open} setOpen={setOpen} />
