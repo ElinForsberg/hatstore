@@ -18,7 +18,7 @@ function Header() {
         setOpen(false);
       };
   return (
-    <>
+    <div className="header">
         <div className="promo">
             <div>JUST NU!! Få 20% rabatt, använda koden FALL23</div>
         </div>
@@ -40,7 +40,7 @@ function Header() {
             </Link>
             }
         { loggedInUser &&
-            <Button variant="outlined" size="small" sx={{marginLeft:5}}> LogOut </Button>
+            <Button variant="outlined" size="small" sx={{width:"150px"}}> LogOut </Button>
         }    
             <Button variant="outlined" size="small" sx={{width:"150px"}} onClick={open ? handleClose : handleOpen} >
                 ShoppingCart
@@ -51,7 +51,7 @@ function Header() {
         
         
     </div>
-    </>
+    </div>
   )
 }
 

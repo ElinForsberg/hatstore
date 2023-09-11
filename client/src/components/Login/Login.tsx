@@ -56,18 +56,21 @@ function Login() {
        
       </Box>
     }
+     <div className="loginWrapper">
     <Box className="boxContainer"
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        marginTop: 5
+        marginTop: 7,
+        width:900
+       
       }}
       >
     <Box className="leftBox"
       component="form"
       sx={{
-       width: 400,
-       height: 400,
+       width: 300,
+       height: 300,
        display:"flex",
        flexDirection: "column",
        alignItems:"center",
@@ -88,6 +91,7 @@ function Login() {
       <h3>Login</h3> 
       <TextField id="outlined-basic" 
       required
+      size="small"
       label="Email" 
       variant="outlined"
       value={email}  
@@ -97,6 +101,7 @@ function Login() {
       />
       <TextField id="outlined-basic" 
       required
+      size="small"
       label="Password" 
       type= "password"
       variant="outlined" 
@@ -105,6 +110,7 @@ function Login() {
       sx={{marginBottom: 5}}
       />
       <Button variant="outlined" 
+      size="small"
       onClick={handleLogin}
       sx={{marginBottom: 5}}
       >
@@ -116,8 +122,8 @@ function Login() {
      <Box className="rightBox"
       component="form"
         sx={{
-          width: 400,
-          height: 400,
+          width: 300,
+          height: 300,
           display:"flex",
           flexDirection: "column",
           alignItems:"center",
@@ -138,6 +144,7 @@ function Login() {
       <h3>Register</h3> 
       <TextField id="outlined-basic" 
       required
+      size="small"
       label="Username" 
       variant="outlined"  
       value={username} 
@@ -146,6 +153,7 @@ function Login() {
       />
       <TextField id="outlined-basic" 
       required
+      size="small"
       label="Email" 
       variant="outlined"
       value={email}   
@@ -154,6 +162,7 @@ function Login() {
        />
       <TextField id="outlined-basic" 
       required
+      size="small"
       label="Password" 
       type= "password"
       variant="outlined"  
@@ -161,11 +170,11 @@ function Login() {
       onChange= {(e) => setPassword(e.target.value)}
       sx={{marginBottom: 5}}
       />
-      <Button variant="outlined" onClick={handleRegisterUser}>Register new User</Button>
+      <Button variant="outlined" size="small" onClick={handleRegisterUser}>Register new User</Button>
     </Box>
     </Box>
    
-    
+    </div>
     </div>
   )
 }
