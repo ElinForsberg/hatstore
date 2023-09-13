@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from "./components/Home/Home";
 import Confirmation from "./components/Confirmation";
 import Login from "./components/Login/Login";
+import Orders from "./components/Orders/Orders";
 import { ThemeOptions } from '@mui/material/styles';
 
 // export const themeOptions: ThemeOptions = {
@@ -30,7 +31,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/confirmation" element={<Confirmation/>}/> 
-      <Route path="/login" element={<Login/>}/>     
+      <Route path="/login" element={<Login/>}/> 
+      <Route path="/myorders" element={<Orders/>}/> 
     </Routes>
    </BrowserRouter>
   )

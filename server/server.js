@@ -8,6 +8,7 @@ const cookieSession = require("cookie-session");
 const { userRouter } = require("./router/user.router");
 const {checkoutRouter} = require("./router/checkout.router")
 const {productRouter} = require("./router/product.router")
+const { orderRouter } = require("./router/order.router")
 
 const app = express();
 app.use(express.json());
@@ -36,6 +37,7 @@ app.use(
 app.use("/api", userRouter);
 app.use("/api", checkoutRouter);
 app.use("/api", productRouter);
+app.use("/api", orderRouter);
 
 
 

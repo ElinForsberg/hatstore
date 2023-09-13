@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import MyDrawer from "../MyDrawer/MyDrawer";
 import { useUser } from "../../context/UserContext";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 function Header() {
     const [open, setOpen] = useState(false);
@@ -25,12 +25,19 @@ function Header() {
         <div className="headerContainer">
     
             <div className="logoWrapper">
-            {/* <Link to="/"> */}
-                <h1 className="logo">Welcome to HatStore</h1>
-            {/* </Link> */}
+           
+                <h1 className="logo">
+                    <Link to="/">
+                        Welcome to HatStore
+                    </Link>
+                </h1>
+                <div className="logoHat">
+                <i className="fa-brands fa-redhat fa-3x"></i>
+                </div>
+               
+           
             
-                
-            {/* <FontAwesomeIcon icon={faRedhat} style={{color: "#01060e",}} />      */}
+            
             
         </div>
         <div className="btnWrapper">

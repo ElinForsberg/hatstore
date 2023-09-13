@@ -6,6 +6,7 @@ interface IUserContext {
     setLoggedInUser: React.Dispatch<React.SetStateAction<undefined>>,
     login: (user:UserType) => Promise<void>;
     registerUser: (user:RegisterUser) => Promise<void>;
+    // showAlert: () => void;
 }
 
 interface User {
@@ -32,7 +33,8 @@ const defaultValues = {
 loggedInUser: null,
 login: async () => {},
 registerUser: async () => {},
-setLoggedInUser: () => {}
+setLoggedInUser: () => {},
+showAlert: () => {}
 
 }
 
@@ -43,6 +45,11 @@ export const useUser = () => useContext(UserContext);
 
 const UserProvider = ({children}: PropsWithChildren) => {
     const [ loggedInUser, setLoggedInUser ] = useState();
+    // const [loginAlert, setLoginAlert] = useState("");
+
+    // const showAlert = () => {
+    //     setLoginAlert("Wrong email or password!")
+    //   }
 
     useEffect(() => {
         const authorization = async () => {
@@ -77,8 +84,9 @@ const UserProvider = ({children}: PropsWithChildren) => {
                 if(response.status === 200) {
                     setLoggedInUser(data);
                     console.log(data);
-                    
-                }
+                } 
+                // }  showAlert(); 
+                
             } catch(err) {
                 console.log(err);
                 
@@ -115,7 +123,8 @@ const UserProvider = ({children}: PropsWithChildren) => {
            login,
            setLoggedInUser,
            loggedInUser,
-           registerUser
+           registerUser,
+        //    showAlert
             
         }}
         >

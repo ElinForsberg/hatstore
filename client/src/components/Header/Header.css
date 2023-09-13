@@ -29,11 +29,25 @@
 }
 
 .logoWrapper {
+    display: flex;
+    align-items: center;
     margin-left: 15px;
     font-family: 'Comfortaa';
-   
+}
+
+.logoWrapper a {
+    text-decoration: none;
+    color: black;
+}
+.logo {
+    margin-top: 20px;
 
 }
+.logoHat {
+    margin-bottom: 15px;
+    
+}
+
 
 .btnWrapper {
     display: flex;

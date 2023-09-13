@@ -13,7 +13,11 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    
+    // const [loginAlert, setLoginAlert] = useState("");
+
+    // const showAlert = () => {
+    //   setLoginAlert("Wrong email or password!")
+    // }
     
     async function handleLogin (e: { preventDefault: () => void; }) {
         e.preventDefault()
@@ -25,6 +29,7 @@ function Login() {
         setPassword("");
     
         await login(user)
+        
     }
 
     async function handleRegisterUser (e: { preventDefault: () => void; }) {
@@ -52,8 +57,7 @@ function Login() {
         </h2>
         <Link to = "/">
           <Button>Go shopping</Button>
-        </Link>
-       
+        </Link>    
       </Box>
     }
      <div className="loginWrapper">
@@ -79,7 +83,6 @@ function Login() {
        paddingBottom: 10,
        border: "1px solid black",
        borderRadius: 2,
-      //  marginLeft: 10,
        backgroundColor: "white",
        boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" 
        
@@ -132,7 +135,6 @@ function Login() {
           paddingBottom: 10,
           border: "1px solid black",
           borderRadius: 2,
-          // marginRight: 10,
           backgroundColor: "white",
           boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px" 
           

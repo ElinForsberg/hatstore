@@ -42,11 +42,14 @@ const verifyPayment = async (req,res) => {
         const order = {
             created: new Date(session.created * 1000), // Convert timestamp to date
             customer: session.customer_details.name,
+            email: session.customer_details.email,
+            totalSum: session.amount_total / 100,
             products: products.data.map((item) => ({
               description: item.description,
               quantity: item.quantity,
               price: item.price.unit_amount / 100, // Convert from cents to dollars
               currency: item.price.currency,
+              total: item.amount_total / 100
             })),
         };
         console.log("ORDER", order)
