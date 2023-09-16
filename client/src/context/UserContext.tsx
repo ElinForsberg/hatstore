@@ -3,10 +3,16 @@ import { PropsWithChildren, createContext, useContext, useEffect, useState } fro
 
 interface IUserContext {
     loggedInUser?: User | null;
-    setLoggedInUser: React.Dispatch<React.SetStateAction<undefined>>,
+    setLoggedInUser: React.Dispatch<React.SetStateAction<undefined>>;
     login: (user:UserType) => Promise<void>;
     registerUser: (user:RegisterUser) => Promise<void>;
+    isRegistered: boolean;
+    setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>;
     // showAlert: () => void;
+    loginAlert: boolean;
+    setLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
+    registerAlert: boolean;
+    setRegisterAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface User {
@@ -34,7 +40,13 @@ loggedInUser: null,
 login: async () => {},
 registerUser: async () => {},
 setLoggedInUser: () => {},
-showAlert: () => {}
+// showAlert: () => {},
+isRegistered: false,
+setIsRegistered: () => {},
+loginAlert: false,
+setLoginAlert: () => {},
+registerAlert: false,
+setRegisterAlert: () => {}
 
 }
 
@@ -45,11 +57,9 @@ export const useUser = () => useContext(UserContext);
 
 const UserProvider = ({children}: PropsWithChildren) => {
     const [ loggedInUser, setLoggedInUser ] = useState();
-    // const [loginAlert, setLoginAlert] = useState("");
-
-    // const showAlert = () => {
-    //     setLoginAlert("Wrong email or password!")
-    //   }
+    const [ isRegistered, setIsRegistered ] = useState(false);
+    const [loginAlert, setLoginAlert] = useState(false);
+    const [registerAlert, setRegisterAlert] = useState(false);
 
     useEffect(() => {
         const authorization = async () => {
@@ -84,9 +94,10 @@ const UserProvider = ({children}: PropsWithChildren) => {
                 if(response.status === 200) {
                     setLoggedInUser(data);
                     console.log(data);
-                } 
-                // }  showAlert(); 
-                
+               
+                }  else {
+                    setLoginAlert(true);
+                }
             } catch(err) {
                 console.log(err);
                 
@@ -107,10 +118,16 @@ const UserProvider = ({children}: PropsWithChildren) => {
                 const data = await response.json();
 
                 if(response.status === 200) {
-                    setLoggedInUser(data);
-                    console.log(data);
+                    setIsRegistered(true)
+                    // setLoggedInUser(data);
+                    console.log(data, "new customer is registred");
                     
+                } else {
+                    console.log("user already exist");
+                
+                    setRegisterAlert(true)
                 }
+               
             } catch(err) {
                 console.log(err);
         }
@@ -124,7 +141,12 @@ const UserProvider = ({children}: PropsWithChildren) => {
            setLoggedInUser,
            loggedInUser,
            registerUser,
-        //    showAlert
+           isRegistered,
+           setIsRegistered,
+           loginAlert,
+           setLoginAlert,
+           registerAlert,
+           setRegisterAlert
             
         }}
         >

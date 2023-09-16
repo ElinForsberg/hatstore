@@ -46,5 +46,47 @@
     "username": "Test",
     "password": "$2b$10$7QCPd1VM74sK69LY/YCZzOVidj2cju0YdRuFUZ1LRor9UYEoLbQyK",
     "email": "test@hotmai.com"
+  },
+  {
+    "id": "cus_OeEi1lRFZPjOZ7",
+    "username": "elin",
+    "password": "$2b$10$WOOqbxn7ROrQH6lvRbnbU.RcfI1Us9JQf2Edj4LjOc.XNB/GTZ9Va",
+    "email": "elin@hotmail.com"
+  },
+  {
+    "id": "cus_OeEllwmSCw7hQZ",
+    "username": "matte",
+    "password": "$2b$10$3Hw4EhRy4rtpVQupGgwvlOg6Qqy4vaEBZ04nn7B.oSDqPCj8EOb9u",
+    "email": "matte@hotmail.com"
+  },
+  {
+    "id": "cus_OeExo2AAfvQIgv",
+    "username": "mio",
+    "password": "$2b$10$fAh6SJLOgQfB3o4kP2o.a.0sOFWtDj0L9a9KqjByjGSclgS6GFRsW",
+    "email": "mio@hotmail.com"
+  },
+  {
+    "id": "cus_OeEziHPVhtaV60",
+    "username": "neo",
+    "password": "$2b$10$Oa2c/T/0VccPSB.7W5qyVOWdp1iFrZOhZNMR9TE21alzqO8MyauY.",
+    "email": "neo@hotmail.com"
+  },
+  {
+    "id": "cus_OeFx0YPEiuVrDF",
+    "username": "kaninen",
+    "password": "$2b$10$wWxM/kiOSOC90Lvs50mQHew0jdXz09OqUesdT8AE9Ys8OvrSI4YGW",
+    "email": "kaninen@hotmail.com"
+  },
+  {
+    "id": "cus_OeG876FGHDia22",
+    "username": "olivia",
+    "password": "$2b$10$cmlUALOat30GT3ea/U8XTeghijorVNbILKv4WNFUkVINCfjcVXhJq",
+    "email": "olivia@hotmail.com"
+  },
+  {
+    "id": "cus_OeG9jP4ED9JOja",
+    "username": "melvin",
+    "password": "$2b$10$dfpjV6AeCy/myJESoqKTXey1oBCZnejEGaZP0n90/HylFf2/5W0AG",
+    "email": "melvin@hotmail.com"
   }
 ]

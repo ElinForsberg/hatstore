@@ -6,27 +6,27 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
-
+import Alert from '@mui/joy/Alert';
+import IconButton from '@mui/joy/IconButton';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 function Login() {
-    const { login, registerUser, loggedInUser } = useUser();
+    const { login, registerUser, loggedInUser, isRegistered, loginAlert, setLoginAlert, registerAlert, setRegisterAlert } = useUser();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    // const [loginAlert, setLoginAlert] = useState("");
-
-    // const showAlert = () => {
-    //   setLoginAlert("Wrong email or password!")
-    // }
+    const [loginPassword, setLoginPassword] = useState("");
+    const [loginEmail, setLoginEmail] = useState("");
     
+   
     async function handleLogin (e: { preventDefault: () => void; }) {
         e.preventDefault()
         const user: UserType = {
-            email,
-            password
+            email: loginEmail,
+            password: loginPassword
         }
-        setEmail("");
-        setPassword("");
+        setLoginEmail("");
+        setLoginPassword("");
     
         await login(user)
         
@@ -60,6 +60,16 @@ function Login() {
         </Link>    
       </Box>
     }
+     {isRegistered && !loggedInUser &&
+      <Box sx={{height: 100, display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop: 5}}>
+        <h2>
+        You are succesfully registered, you can now log in!
+        </h2>
+        
+      </Box>
+    }
+    
+    
      <div className="loginWrapper">
     <Box className="boxContainer"
       sx={{
@@ -92,14 +102,16 @@ function Login() {
       autoComplete="off"
     >
       <h3>Login</h3> 
+      
+
       <TextField id="outlined-basic" 
       required
       size="small"
       label="Email" 
       variant="outlined"
-      value={email}  
+      value={loginEmail}  
       
-      onChange= {(e) => setEmail(e.target.value)}
+      onChange= {(e) => setLoginEmail(e.target.value)}
       sx={{marginBottom: 5, marginTop: 10}}
       />
       <TextField id="outlined-basic" 
@@ -108,8 +120,8 @@ function Login() {
       label="Password" 
       type= "password"
       variant="outlined" 
-      value={password}  
-      onChange= {(e) => setPassword(e.target.value)}
+      value={loginPassword}  
+      onChange= {(e) => setLoginPassword(e.target.value)}
       sx={{marginBottom: 5}}
       />
       <Button variant="outlined" 
@@ -119,6 +131,19 @@ function Login() {
       >
         LogIn
       </Button>
+
+      {loginAlert &&
+         <Box sx={{ width: '100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
+         <Alert
+         variant="outlined" size="sm" color="danger"
+           endDecorator={
+             <IconButton variant="outlined" size="sm" color="danger" onClick={() => setLoginAlert(false)}>
+               <CloseRoundedIcon />
+             </IconButton>
+           }
+         >Wrong email or password</Alert>
+       </Box>
+    }
     </Box>
      
    
@@ -173,6 +198,18 @@ function Login() {
       sx={{marginBottom: 5}}
       />
       <Button variant="outlined" size="small" onClick={handleRegisterUser}>Register new User</Button>
+      {registerAlert &&
+         <Box sx={{ width: '100%', display:"flex", justifyContent:"center", alignItems:"center"}}>
+         <Alert
+         variant="outlined" size="sm" color="danger"
+           endDecorator={
+             <IconButton variant="outlined" size="sm" color="danger" onClick={() => setRegisterAlert(false)}>
+               <CloseRoundedIcon />
+             </IconButton>
+           }
+         >Email or username already exist!</Alert>
+       </Box>
+    }
     </Box>
     </Box>
    

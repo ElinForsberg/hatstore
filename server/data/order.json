@@ -182,5 +182,20 @@
         "total": 1449
       }
     ]
+  },
+  {
+    "created": "2023-09-14T16:01:32.000Z",
+    "customer": "anna",
+    "email": "anna@hotmail.com",
+    "totalSum": 699,
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": 699,
+        "currency": "sek",
+        "total": 699
+      }
+    ]
   }
 ]

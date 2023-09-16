@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import MyDrawer from "../MyDrawer/MyDrawer";
 import { useUser } from "../../context/UserContext";
+import Person from '@mui/icons-material/Person';
+import Typography from '@mui/joy/Typography';
 
 
 function Header() {
@@ -28,7 +30,7 @@ function Header() {
            
                 <h1 className="logo">
                     <Link to="/">
-                        Welcome to HatStore
+                       HatStore
                     </Link>
                 </h1>
                 <div className="logoHat">
@@ -47,7 +49,19 @@ function Header() {
             </Link>
             }
         { loggedInUser &&
+        <div>
+            <div id="orderLink">
+                <Link to="/myorders">
+                    <Button variant="outlined" size="small" sx={{width:"150px"}} >
+                    <Person/>
+                    My Orders
+                    </Button>
+                
+                </Link>
+           
+            </div>
             <Button variant="outlined" size="small" sx={{width:"150px"}}> LogOut </Button>
+        </div>
         }    
             <Button variant="outlined" size="small" sx={{width:"150px"}} onClick={open ? handleClose : handleOpen} >
                 ShoppingCart
@@ -55,7 +69,7 @@ function Header() {
                 <MyDrawer open={open} setOpen={setOpen} />
             </Button>
         </div>
-        
+            
         
     </div>
     </div>

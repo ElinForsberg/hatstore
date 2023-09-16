@@ -57,6 +57,13 @@
 
 }
 
+#orderLink a{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: black;
+}
+
 @media (max-width: 1000px) {
     .btnWrapper {
         flex-direction: column;
