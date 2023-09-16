@@ -82,7 +82,7 @@ if(passwordMatch) {
     }
 }
 
-async function authorize(req, res) {
+  const authorize= async (req, res) => {
     if (!req.session.id) {
       return res.status(401).json("You are not logged in");
     }
@@ -91,4 +91,15 @@ async function authorize(req, res) {
     
   }
 
-module.exports = {registerUser, login, authorize}
+  const logout = async (req,res) => {
+    if (!req.session.id) {
+      return res.status(400).json("Cannot logout when you are not logged in");
+    }
+    req.session = null;
+    res.status(204).json(null);
+  }
+  
+
+
+
+module.exports = {registerUser, login, authorize, logout}

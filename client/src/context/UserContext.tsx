@@ -3,7 +3,7 @@ import { PropsWithChildren, createContext, useContext, useEffect, useState } fro
 
 interface IUserContext {
     loggedInUser?: User | null;
-    setLoggedInUser: React.Dispatch<React.SetStateAction<undefined>>;
+    setLoggedInUser: React.Dispatch<React.SetStateAction<User | null>>;
     login: (user:UserType) => Promise<void>;
     registerUser: (user:RegisterUser) => Promise<void>;
     isRegistered: boolean;
@@ -13,6 +13,7 @@ interface IUserContext {
     setLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
     registerAlert: boolean;
     setRegisterAlert: React.Dispatch<React.SetStateAction<boolean>>;
+    logout: () => void;
 }
 
 interface User {
@@ -46,7 +47,8 @@ setIsRegistered: () => {},
 loginAlert: false,
 setLoginAlert: () => {},
 registerAlert: false,
-setRegisterAlert: () => {}
+setRegisterAlert: () => {},
+logout: async () => {}
 
 }
 
@@ -56,7 +58,7 @@ const UserContext = createContext<IUserContext>(defaultValues);
 export const useUser = () => useContext(UserContext);
 
 const UserProvider = ({children}: PropsWithChildren) => {
-    const [ loggedInUser, setLoggedInUser ] = useState();
+    const [ loggedInUser, setLoggedInUser ] = useState<User | null>(null);
     const [ isRegistered, setIsRegistered ] = useState(false);
     const [loginAlert, setLoginAlert] = useState(false);
     const [registerAlert, setRegisterAlert] = useState(false);
@@ -134,6 +136,24 @@ const UserProvider = ({children}: PropsWithChildren) => {
     } 
 }
 
+const logout = async () => {
+
+    try {
+      const response = await fetch("api/user/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 204) {
+        setLoggedInUser(null);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
     return (
         <UserContext.Provider
         value={{
@@ -146,7 +166,8 @@ const UserProvider = ({children}: PropsWithChildren) => {
            loginAlert,
            setLoginAlert,
            registerAlert,
-           setRegisterAlert
+           setRegisterAlert,
+           logout
             
         }}
         >

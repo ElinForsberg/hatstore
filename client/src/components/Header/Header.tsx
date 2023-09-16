@@ -11,7 +11,7 @@ import Typography from '@mui/joy/Typography';
 
 function Header() {
     const [open, setOpen] = useState(false);
-    const { loggedInUser } = useUser()
+    const { loggedInUser, logout } = useUser()
     const handleOpen = () => {
         setOpen(true);
       };
@@ -19,6 +19,10 @@ function Header() {
       const handleClose = () => {
         setOpen(false);
       };
+      const handleLogout = async () => {
+        await logout();
+      };
+
   return (
     <div className="header">
         <div className="promo">
@@ -60,7 +64,7 @@ function Header() {
                 </Link>
            
             </div>
-            <Button variant="outlined" size="small" sx={{width:"150px"}}> LogOut </Button>
+            <Button variant="outlined" size="small" sx={{width:"150px"}} onClick={handleLogout}> LogOut </Button>
         </div>
         }    
             <Button variant="outlined" size="small" sx={{width:"150px"}} onClick={open ? handleClose : handleOpen} >
