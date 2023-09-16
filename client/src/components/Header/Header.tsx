@@ -22,7 +22,7 @@ function Header() {
   return (
     <div className="header">
         <div className="promo">
-            <div>JUST NU!! Få 20% rabatt, använda koden FALL23</div>
+            <div>Limited offer!!! Get 20% off, use code: FALL23</div>
         </div>
         <div className="headerContainer">
     

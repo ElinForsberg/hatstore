@@ -197,5 +197,20 @@
         "total": 699
       }
     ]
+  },
+  {
+    "created": "2023-09-16T13:43:57.000Z",
+    "customer": "elin",
+    "email": "elin@hotmail.com",
+    "totalSum": 2318.4,
+    "products": [
+      {
+        "description": "STETSON ARIPEKA",
+        "quantity": 2,
+        "price": 1449,
+        "currency": "sek",
+        "total": 2318.4
+      }
+    ]
   }
 ]

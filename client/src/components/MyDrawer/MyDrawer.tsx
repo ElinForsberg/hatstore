@@ -2,7 +2,6 @@ import "./MyDrawer.css";
 import Drawer from "@mui/material/Drawer";
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../../context/ProductContext";
 import { useUser } from "../../context/UserContext";
@@ -69,9 +68,17 @@ function MyDrawer({open, setOpen}: ShoppingDrawerProps ) {
           </div>
 
       }
-      {loggedInUser &&
+      {loggedInUser && cart.length >0 &&
         <div className="loginContainer">
           <Button className="cartBtn" variant="outlined" onClick={handlePayment}> Go to Checkout </Button>
+        </div>
+      }
+
+      {
+        cart.length ==0 &&
+        <div className="loginContainer">
+        <p>Your shoppingcart is empty</p>
+
         </div>
       }
       
