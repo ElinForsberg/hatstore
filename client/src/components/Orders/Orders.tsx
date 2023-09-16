@@ -13,7 +13,7 @@ function Orders() {
         <div className="ordersContainer">
         <Header/>
 
-          <Typography level="h2" className="orderTitle">My Orders</Typography>
+          <Typography level="h2" sx={{marginTop:"50px", marginBottom:"50px"}}>My Orders</Typography>
       
           
           {orders.map((order, index) => (

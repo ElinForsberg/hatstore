@@ -212,5 +212,64 @@
         "total": 2318.4
       }
     ]
+  },
+  {
+    "customer": "elin",
+    "email": "elin@hotmail.com",
+    "totalSum": 2498,
+    "products": [
+      {
+        "description": "BRIXTON JOANNA RANCHER",
+        "quantity": 2,
+        "price": 1249,
+        "currency": "sek",
+        "total": 2498
+      }
+    ]
+  },
+  {
+    "created": "2023-09-16T14:30:28.000Z",
+    "customer": "elin",
+    "email": "elin@hotmail.com",
+    "totalSum": 699,
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": 699,
+        "currency": "sek",
+        "total": 699
+      }
+    ]
+  },
+  {
+    "created": "2023-09-16T14:35:12.000Z",
+    "customer": "elin",
+    "email": "elin@hotmail.com",
+    "totalSum": 1249,
+    "products": [
+      {
+        "description": "BRIXTON JOANNA RANCHER",
+        "quantity": 1,
+        "price": 1249,
+        "currency": "sek",
+        "total": 1249
+      }
+    ]
+  },
+  {
+    "created": "2023-09-16T14:38:38.000Z",
+    "customer": "elin",
+    "email": "elin@hotmail.com",
+    "totalSum": 699,
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": 699,
+        "currency": "sek",
+        "total": 699
+      }
+    ]
   }
 ]
