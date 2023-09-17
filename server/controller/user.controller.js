@@ -11,45 +11,42 @@ const filePath = path.join(__dirname, "..", "data", "user.json")
 
 const registerUser = async (req, res) => {
     const { username, password, email } = req.body;
+    let userData = [];
+
     try {
-        const customer = await stripe.customers.create({
-            email: email,
-            name: username
-        })
-         //hasha lösenordet
-         const hashedPassword = await bcrypt.hash(password, 10);
-
-         const newUser = {
-            id: customer.id,
-            username, 
-            password: hashedPassword,
-            email: customer.email,
-          };
-
-          
-          
-          let userData = [];
-          try {
-            const fileData = fs.readFileSync(filePath, "utf8");
+      const fileData = fs.readFileSync(filePath, "utf8");
              userData = JSON.parse(fileData);
-            } catch (err){
-                console.log(err);
-              }
-            //   kolla om användarnamn eller email redan finns
-          const existingUser = userData.find((user) => user.username === username || user.email === email);
-          if(existingUser) {
-            return res.status(409).json({message: "user already exists"});
-          }
-            
+      const existingUser = userData.find((user) => user.username === username || user.email === email) 
+      if(!existingUser){
+        const customer = await stripe.customers.create({
+          email: email,
+          name: username
+      }) 
+       //hasha lösenordet
+       const hashedPassword = await bcrypt.hash(password, 10);
+
+       const newUser = {
+          id: customer.id,
+          username, 
+          password: hashedPassword,
+          email: customer.email,
+        };
+      
+          const fileData = fs.readFileSync(filePath, "utf8");
+           userData = JSON.parse(fileData);
+          
+
+            // existingUser = userData.find((user) => user.username === username || user.email === email);
+           
             userData.push(newUser);
             fs.writeFileSync(filePath, JSON.stringify(userData, null, 2));
             // fs.writeFileSync(filePath, JSON.stringify(newUser));
-            res.json({newUser})
-
-        // if (!username || !password || !email) {
-        //     return res.status(400).json({ message: "Please provide all required fields." });
-        //   }
-
+            res.status(200).json({newUser})
+            
+      }  else {
+        return res.status(409).json({message: "user already exists"});
+      }  
+   
     }
     catch (error) {
         console.log(error);
@@ -58,12 +55,12 @@ const registerUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     try {
         const fileData = fs.readFileSync(filePath, "utf8");
         const userData = JSON.parse(fileData);
     
-    const user = userData.find((user) => user.username === username || user.email === username);
+        const user = userData.find((user) => user.email=== email);
         if(!user) {
             return res.status(404).json({message: "user not found"});
         }
@@ -71,7 +68,10 @@ const login = async (req, res) => {
 const passwordMatch = await bcrypt.compare(password, user.password);
 
 if(passwordMatch) {
+    req.session = user;
+    console.log("req",req.session);
     res.json({message: "login successful", user: {username: user.username, email: user.email}});
+    
 } else {
     res.status(401).json({message: "Authentication failed. Incorrect password."})
 }
@@ -82,4 +82,24 @@ if(passwordMatch) {
     }
 }
 
-module.exports = {registerUser, login}
+  const authorize= async (req, res) => {
+    if (!req.session.id) {
+      return res.status(401).json("You are not logged in");
+    }
+    return req.session,
+    res.status(200).json(req.session);
+    
+  }
+
+  const logout = async (req,res) => {
+    if (!req.session.id) {
+      return res.status(400).json("Cannot logout when you are not logged in");
+    }
+    req.session = null;
+    res.status(204).json(null);
+  }
+  
+
+
+
+module.exports = {registerUser, login, authorize, logout}
