@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 
+
 interface IOrderContext {
     getOrders: () => void;
     orders: OrderData[];
@@ -40,7 +41,7 @@ export const useOrderContext = () => useContext(OrderContext);
 const OrderProvider = ({children}: PropsWithChildren) => {
     const [orders, setOrders] = useState<OrderData[]>([]);
     const [isPaymentVerified, setIsPaymentVerified] = useState(false)
-
+ 
     useEffect(() => {
   
       const sessionId = localStorage.getItem("session-id")
@@ -74,38 +75,37 @@ const OrderProvider = ({children}: PropsWithChildren) => {
 
 
     async function getOrders() {
-      
-            try {
-                const response = await fetch(
-                    "/api/orders"
-                );
-                    const data = await response.json();
-                    console.log(data);   
-                    if(response.ok) {
-                        const mappedOrders = data.map((order: OrderData) => ({
-                            created: order.created,
-                            customer: order.customer,
-                            email: order.email,
-                            totalSum: order.totalSum,
-        
-                            products: order.products.map((product: OrderedProductData) => ({
-                                description: product.description,
-                                quantity: product.quantity,
-                                price: product.price,
-                                currency: product.currency
-                            }))
-                        }));
-                        setOrders(mappedOrders)
-                    }
-                   
-                  
-                   
-                            
-            }catch(err){
-                console.log(err);
-                
-            }
-       
+           
+                try {
+                    const response = await fetch(
+                        "/api/orders"
+                    );
+                        const data = await response.json();
+                        console.log(data);   
+                        if(response.ok) {
+                            const mappedOrders = data.map((order: OrderData) => ({
+                                created: order.created,
+                                customer: order.customer,
+                                email: order.email,
+                                totalSum: order.totalSum,
+            
+                                products: order.products.map((product: OrderedProductData) => ({
+                                    description: product.description,
+                                    quantity: product.quantity,
+                                    price: product.price,
+                                    currency: product.currency
+                                }))
+                            }));
+                            setOrders(mappedOrders)
+                        }                    
+                                
+                }catch(err){
+                    console.log(err);
+                    
+                }
+           
+            
+            
         
         
     }

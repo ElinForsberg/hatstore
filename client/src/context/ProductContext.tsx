@@ -5,8 +5,7 @@ import { useUser} from "./UserContext";
 interface IProductContext {
     products: ProductData[];
     setProducts: React.Dispatch<React.SetStateAction<ProductData[]>>;
-    listProducts: () => void;
-    
+    listProducts: () => void;   
     cart: CartItem[];
     setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     handlePayment: () => void;
@@ -38,8 +37,6 @@ interface CartItem {
     price: string;
     currency: string;
     image: string;
-    // customer: string;
-   
    
 }
 
@@ -63,6 +60,8 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     const [products, setProducts] = useState<ProductData[]>([]);
     const [cart, setCart] = useState<CartItem[]>([]);
     const { loggedInUser } = useUser()
+
+
     async function listProducts() {
         
         try {
@@ -87,9 +86,6 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                
                 setProducts(mappedProducts);
                 console.log(data);
-                console.log(mappedProducts);
-                
-               
         }catch(err){
             console.log(err);
             
@@ -97,9 +93,7 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     }
 
     useEffect(() => {
-        listProducts();  
-        
-            
+        listProducts();             
     }, []);
 
     async function handlePayment() {

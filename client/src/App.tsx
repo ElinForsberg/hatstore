@@ -3,7 +3,7 @@ import Home from "./components/Home/Home";
 import Confirmation from "./components/Confirmation/Confirmation";
 import Login from "./components/Login/Login";
 import Orders from "./components/Orders/Orders";
-import { ThemeOptions } from '@mui/material/styles';
+// import { ThemeOptions } from '@mui/material/styles';
 
 // export const themeOptions: ThemeOptions = {
 //   palette: {

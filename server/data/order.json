@@ -271,5 +271,20 @@
         "total": 699
       }
     ]
+  },
+  {
+    "created": "2023-09-18T14:01:16.000Z",
+    "customer": "anna",
+    "email": "anna@hotmail.com",
+    "totalSum": 4347,
+    "products": [
+      {
+        "description": "STETSON ARIPEKA",
+        "quantity": 3,
+        "price": 1449,
+        "currency": "sek",
+        "total": 4347
+      }
+    ]
   }
 ]
