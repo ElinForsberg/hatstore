@@ -4,7 +4,7 @@ const path = require("path")
 const filePath = path.join(__dirname, "..", "data", "order.json")
 
 const getOrders = async (req, res) => {
-    const { email } = req.session;
+    const email  = req.session.email;
     try {
         const fileData = fs.readFileSync(filePath, "utf8");
         const orderData = JSON.parse(fileData);

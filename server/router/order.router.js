@@ -6,6 +6,6 @@ const { auth } = require("../middlewares")
 const orderRouter = express.Router()
 
 
-.get("/orders",  getOrders)
+.get("/orders", auth, getOrders)
 
 module.exports = { orderRouter };

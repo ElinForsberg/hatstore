@@ -1,9 +1,9 @@
 
 function auth(req, res, next) {
-    if (req.session?.id) {
-      return next
+    if (req.session?.id) return next();{
+      res.status(401).json("You must login to perform this request");
+     
     }
-    res.status(401).json("You must login to perform this request");
     
   }
   
