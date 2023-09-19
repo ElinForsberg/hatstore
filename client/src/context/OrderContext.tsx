@@ -109,11 +109,7 @@ const OrderProvider = ({children}: PropsWithChildren) => {
         
         
     }
-    useEffect(() => {
-        getOrders();
-        
-    }, []); 
-
+   
 
 
 
