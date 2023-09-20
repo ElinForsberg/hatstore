@@ -1,4 +1,5 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
+import { PropsWithChildren, createContext, useContext,  useState } from "react";
+
 
 interface IOrderContext {
     getOrders: () => void;
@@ -6,6 +7,7 @@ interface IOrderContext {
     setOrders: React.Dispatch<React.SetStateAction<OrderData[]>>;
     isPaymentVerified: boolean;
     setIsPaymentVerified: React.Dispatch<React.SetStateAction<boolean>>;
+    verifyPayment: () => void;
 }
 
 interface OrderData {
@@ -30,7 +32,8 @@ const defaultValues = {
     orders: [],
     setOrders: () => [],
     isPaymentVerified: false,
-    setIsPaymentVerified: () => {}
+    setIsPaymentVerified: () => {},
+    verifyPayment: () => {}
 }
 
 const OrderContext = createContext<IOrderContext>(defaultValues);
@@ -39,38 +42,38 @@ export const useOrderContext = () => useContext(OrderContext);
 const OrderProvider = ({children}: PropsWithChildren) => {
     const [orders, setOrders] = useState<OrderData[]>([]);
     const [isPaymentVerified, setIsPaymentVerified] = useState(false)
- 
-    useEffect(() => {
-        const sessionId = localStorage.getItem("session-id")
+    
+    const sessionId = localStorage.getItem("session-id")
 
-            const verifyPayment = async () => {
-                const response = await fetch(
-                    "/api/verify-session", 
-                {
-                     method: "POST",
-                    headers: {
-                    "Content-Type": "application/json"
-                     },
-                     body: JSON.stringify({sessionId}),
-                }
-                );
-                const { verified } = await response.json()
-                if(verified){
-                    setIsPaymentVerified(true)
-                    localStorage.removeItem("session-id")
-                }  else {
-                    setIsPaymentVerified(false)
-                }
-            };
-      verifyPayment();
-    }, [])
-  
+    const verifyPayment = async () => {
+        const response = await fetch(
+            "/api/verify-session", 
+        {
+             method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+             },
+             body: JSON.stringify({sessionId}),
+        }
+        );
+        const { verified } = await response.json()
+        if(verified){
+            setIsPaymentVerified(true)
+            localStorage.removeItem("session-id")
+        }  else {
+            setIsPaymentVerified(false)
+        }
+    };
         async function getOrders() {
+           
                 try {
                     const response = await fetch(
                         "/api/orders"
                     );
                         const data = await response.json();
+                        if(response.status ===203) {
+                            setOrders([])
+                        }
                         if(response.ok) {
                             const mappedOrders = data.map((order: OrderData) => ({
                                 created: order.created,
@@ -99,7 +102,8 @@ const OrderProvider = ({children}: PropsWithChildren) => {
         orders,
         setOrders,
         isPaymentVerified,
-        setIsPaymentVerified
+        setIsPaymentVerified,
+        verifyPayment
         }}
         >
             {children}

@@ -1,9 +1,11 @@
 require("dotenv").config();
 const fs = require("fs");
-const path = require("path")
+const path = require("path");
+const { authorize } = require("./user.controller");
 const filePath = path.join(__dirname, "..", "data", "order.json")
 
 const getOrders = async (req, res) => {
+  authorize
     const email  = req.session.email;
     try {
         const fileData = fs.readFileSync(filePath, "utf8");
@@ -12,7 +14,7 @@ const getOrders = async (req, res) => {
         
         const personalOrders = orderData.filter((order) => order.email === email);
         if (personalOrders.length === 0) {
-            res.status(400).json("No orders found for this user");
+            res.status(203).json("No orders found for this user");
           } else {
             res.status(200).json(personalOrders);
           }

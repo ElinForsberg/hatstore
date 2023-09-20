@@ -5,8 +5,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import  { useOrderContext } from "../../context/OrderContext";
 import Header from "../Header/Header";
 import "./Confirmation.css"
+import { useEffect } from "react";
 
 function Confirmation() {
+const {verifyPayment} = useOrderContext();
+
+  useEffect(() => {    
+    verifyPayment();
+  }, [])
+
   const { isPaymentVerified  } = useOrderContext();
   
   return (

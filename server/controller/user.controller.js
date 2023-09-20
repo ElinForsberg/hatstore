@@ -7,8 +7,6 @@ const path = require("path")
 const filePath = path.join(__dirname, "..", "data", "user.json")
 
 
-//registrera ny kund
-
 const registerUser = async (req, res) => {
     const { username, password, email } = req.body;
     let userData = [];
@@ -22,7 +20,7 @@ const registerUser = async (req, res) => {
           email: email,
           name: username
       }) 
-       //hasha lösenordet
+      
        const hashedPassword = await bcrypt.hash(password, 10);
 
        const newUser = {
@@ -34,13 +32,10 @@ const registerUser = async (req, res) => {
       
           const fileData = fs.readFileSync(filePath, "utf8");
            userData = JSON.parse(fileData);
-          
-
-            // existingUser = userData.find((user) => user.username === username || user.email === email);
            
             userData.push(newUser);
             fs.writeFileSync(filePath, JSON.stringify(userData, null, 2));
-            // fs.writeFileSync(filePath, JSON.stringify(newUser));
+           
             res.status(200).json({newUser})
             
       }  else {
@@ -69,7 +64,6 @@ const passwordMatch = await bcrypt.compare(password, user.password);
 
 if(passwordMatch) {
     req.session = user;
-    console.log("req",req.session);
     res.json({message: "login successful", user: {username: user.username, email: user.email}});
     
 } else {

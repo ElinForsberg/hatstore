@@ -57,7 +57,7 @@ const defaultValues = {
         const [ isRegistered, setIsRegistered ] = useState(false);
         const [loginAlert, setLoginAlert] = useState(false);
         const [registerAlert, setRegisterAlert] = useState(false);
-        const {  getOrders } = useOrderContext();
+        const {  getOrders, setOrders } = useOrderContext();
 
 
     const authorization = async () => {
@@ -131,6 +131,7 @@ const logout = async () => {
         });
       if (response.status === 204) {
         setLoggedInUser(null);
+        setOrders([]);
       }
     } catch (err) {
       console.log(err);

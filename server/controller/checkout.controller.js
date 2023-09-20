@@ -23,10 +23,10 @@ const registerCheckout = async (req,res) => {
                 allow_promotion_codes: true,              
             });
             res.status(200).json({url: session.url, sessionId: session.id})
-            // console.log(session);           
+                   
         } catch (error) {
             console.log(error.message);
-            res.status(400).json("det gick inte bra....")
+            res.status(400).json("session was not created")
         } 
     }
    
@@ -46,11 +46,11 @@ const verifyPayment = async (req,res) => {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: true, // Use AM/PM
+        hour12: true, 
 
     });
         const order = {
-            created:formattedDate, // Convert timestamp to date
+            created:formattedDate, 
             customer: session.customer_details.name,
             email: session.customer_details.email,
             totalSum: (parseFloat( session.amount_total) / 100).toFixed(2),
@@ -64,7 +64,7 @@ const verifyPayment = async (req,res) => {
                
             })),
         };
-        console.log("ORDER", order)
+       
         
         let orderData = [];
         try {
