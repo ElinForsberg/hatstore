@@ -1,13 +1,11 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 
-
 interface IOrderContext {
     getOrders: () => void;
     orders: OrderData[];
     setOrders: React.Dispatch<React.SetStateAction<OrderData[]>>;
     isPaymentVerified: boolean;
     setIsPaymentVerified: React.Dispatch<React.SetStateAction<boolean>>;
-
 }
 
 interface OrderData {
@@ -43,45 +41,36 @@ const OrderProvider = ({children}: PropsWithChildren) => {
     const [isPaymentVerified, setIsPaymentVerified] = useState(false)
  
     useEffect(() => {
-  
-      const sessionId = localStorage.getItem("session-id")
-  
-      const verifyPayment = async () => {
-        const response = await fetch(
-          "/api/verify-session", 
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({sessionId}),
-          }
-          );
-          const { verified } = await response.json()
-  
-          if(verified){
-            setIsPaymentVerified(true)
-            localStorage.removeItem("session-id")
-          }  else {
-            setIsPaymentVerified(false)
-          }
-  
-      };
+        const sessionId = localStorage.getItem("session-id")
+
+            const verifyPayment = async () => {
+                const response = await fetch(
+                    "/api/verify-session", 
+                {
+                     method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                     },
+                     body: JSON.stringify({sessionId}),
+                }
+                );
+                const { verified } = await response.json()
+                if(verified){
+                    setIsPaymentVerified(true)
+                    localStorage.removeItem("session-id")
+                }  else {
+                    setIsPaymentVerified(false)
+                }
+            };
       verifyPayment();
     }, [])
   
-
-
-
-
-    async function getOrders() {
-           
+        async function getOrders() {
                 try {
                     const response = await fetch(
                         "/api/orders"
                     );
                         const data = await response.json();
-                        console.log(data);   
                         if(response.ok) {
                             const mappedOrders = data.map((order: OrderData) => ({
                                 created: order.created,
@@ -97,26 +86,12 @@ const OrderProvider = ({children}: PropsWithChildren) => {
                                 }))
                             }));
                             setOrders(mappedOrders)
-                        }                    
-                                
+                        }                              
                 }catch(err){
                     console.log(err);
-                    
                 }
-           
-            
-            
-        
-        
     }
    
-
-
-
-
-
-
-
     return (
         <OrderContext.Provider
         value={{
@@ -125,7 +100,6 @@ const OrderProvider = ({children}: PropsWithChildren) => {
         setOrders,
         isPaymentVerified,
         setIsPaymentVerified
-            
         }}
         >
             {children}

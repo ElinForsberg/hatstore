@@ -88,5 +88,17 @@
     "username": "melvin",
     "password": "$2b$10$dfpjV6AeCy/myJESoqKTXey1oBCZnejEGaZP0n90/HylFf2/5W0AG",
     "email": "melvin@hotmail.com"
+  },
+  {
+    "id": "cus_OfgOA87GjUoa0Y",
+    "username": "Sixten",
+    "password": "$2b$10$C8FvdDU1OaV.2JQUE23CqOrqMQZC0nMakLrS58rb5MAjvS0BWs6Ca",
+    "email": "sixten@hotmail.com"
+  },
+  {
+    "id": "cus_OfhFFAl2Z848PI",
+    "username": "Tage",
+    "password": "$2b$10$9TdbTwPtgRoOoJDsy11o/OQ3UpXLpBNp/mlY9STU4EnSTV1PUXM8W",
+    "email": "tage@hotmail.com"
   }
 ]

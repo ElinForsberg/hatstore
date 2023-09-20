@@ -2,8 +2,7 @@
     min-height: 200px;
 }
 
-.cartItem {
-    
+.cartItem {  
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +20,6 @@
     margin-bottom: 20px;
     margin-right: 20px;
 }
-
 
 .loginContainer {
     height: 50px;
