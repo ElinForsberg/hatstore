@@ -11,7 +11,7 @@ import IconButton from '@mui/joy/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 function Login() {
-    const { login, registerUser, loggedInUser, isRegistered, loginAlert, setLoginAlert, registerAlert, setRegisterAlert } = useUser();
+    const { login, registerUser, loggedInUser, isRegistered, loginAlert, setLoginAlert, registerAlert, setRegisterAlert, authorization} = useUser();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -29,7 +29,7 @@ function Login() {
         setLoginPassword("");
     
         await login(user)
-        
+        authorization();
     }
 
     async function handleRegisterUser (e: { preventDefault: () => void; }) {

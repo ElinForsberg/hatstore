@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
+import { useOrderContext } from "./OrderContext";
 
 
 interface IUserContext {
@@ -14,6 +15,7 @@ interface IUserContext {
     registerAlert: boolean;
     setRegisterAlert: React.Dispatch<React.SetStateAction<boolean>>;
     logout: () => void;
+    authorization: () => void;
 }
 
 interface User {
@@ -48,7 +50,8 @@ loginAlert: false,
 setLoginAlert: () => {},
 registerAlert: false,
 setRegisterAlert: () => {},
-logout: async () => {}
+logout: async () => {},
+authorization:() => {}
 
 }
 
@@ -62,22 +65,25 @@ const UserProvider = ({children}: PropsWithChildren) => {
     const [ isRegistered, setIsRegistered ] = useState(false);
     const [loginAlert, setLoginAlert] = useState(false);
     const [registerAlert, setRegisterAlert] = useState(false);
+    const {  getOrders } = useOrderContext();
 
-    useEffect(() => {
-        const authorization = async () => {
-          try {
-            const response = await fetch("/api/user/authorize");
-            const data = await response.json();
-            if (response.status === 200 || response.status === 304) {
-              setLoggedInUser(data);
-              console.log(data);
-              
-            }
-     
-          } catch (err) {
-            console.log(err);
+
+    const authorization = async () => {
+        try {
+          const response = await fetch("/api/user/authorize");
+          const data = await response.json();
+          if (response.status === 200 || response.status === 304) {
+            setLoggedInUser(data);
+            console.log(data);
+            
           }
-        };
+   
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    useEffect(() => {
+        
         authorization();
       }, []);
 
@@ -96,7 +102,7 @@ const UserProvider = ({children}: PropsWithChildren) => {
                 if(response.status === 200) {
                     setLoggedInUser(data);
                     console.log(data);
-               
+                    getOrders();
                 }  else {
                     setLoginAlert(true);
                 }
@@ -128,6 +134,7 @@ const UserProvider = ({children}: PropsWithChildren) => {
                     console.log("user already exist");
                 
                     setRegisterAlert(true)
+                   
                 }
                
             } catch(err) {
@@ -147,7 +154,9 @@ const logout = async () => {
       });
 
       if (response.status === 204) {
+        // setOrders([]);
         setLoggedInUser(null);
+        
       }
     } catch (err) {
       console.log(err);
@@ -167,7 +176,8 @@ const logout = async () => {
            setLoginAlert,
            registerAlert,
            setRegisterAlert,
-           logout
+           logout,
+           authorization
             
         }}
         >

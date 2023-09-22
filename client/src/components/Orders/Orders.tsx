@@ -4,48 +4,62 @@ import { useOrderContext } from "../../context/OrderContext";
 import Header from "../Header/Header";
 import "./Orders.css"
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useUser } from "../../context/UserContext";
 
 function Orders() {
-    const { orders } = useOrderContext();
-   
-   
-    return (
-        <div className="ordersContainer">
-        <Header/>
-
-          <Typography level="h2" sx={{marginTop:"50px", marginBottom:"50px"}}>My Orders</Typography>
+    const { orders, getOrders } = useOrderContext();
+   const {loggedInUser} = useUser();
+    useEffect(() => {
+      getOrders();
       
-          
-          {orders.map((order, index) => (
-            <Box key={index} sx={{borderBottom:"1px solid black", marginBottom:"10px"}}>
-             <Box sx={{width: "80vw",display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-             <Typography level="h3">Order placed on: {order.created}</Typography>
-             <Typography level="h3">Total Sum: {order.totalSum} sek</Typography>
-             {/* <p>Order placed on: {order.created}</p>
-              <p>Total Sum: {order.totalSum} sek</p> */}
-             </Box>
-              
-              <Box>
-              <Typography level="h4">Products:</Typography>
-                
-                {order.products.map((product, productIndex) => (
-                  <Box key={productIndex}>
-                    <Typography level="body-lg">{product.description}</Typography>
-                    <Typography level="body-md">Price: {product.price} {product.currency}</Typography>
-                    <Typography level="body-md">Quantity: {product.quantity}</Typography>
-                    {/* <p> {product.description}</p>
-                    <p>Price: {product.price} {product.currency}</p>
-                    <p>Quantity: {product.quantity}</p>
-                     */}
+  }, []); 
+
+   
+      return (
+        <div className="ordersContainer">
+          <Header />
+          {loggedInUser ? (
+            <>
+              <Typography level="h2" sx={{ marginTop: "50px", marginBottom: "50px" }}>
+                My Orders
+              </Typography>
+              {orders.map((order, index) => (
+                <Box key={index} sx={{ marginBottom: "10px",borderRadius:"5px", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px", padding: "8px", backgroundColor: "white" }}>
+                  <Box sx={{ width: "50vw", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                    <Typography level="h4">Order placed on: {order.created}</Typography>
+                    <Typography level="h4">Total Sum: {order.totalSum} sek</Typography>
+                   
                   </Box>
-                ))}
-              </Box>
-            </Box>
-          ))}
-        <Link to="/">
-            <Button>Go shopping</Button>
-        </Link>
-         
+                 
+                  <Box>
+                    <Typography level="body-lg">Products:</Typography>
+      
+                    {order.products.map((product, productIndex) => (
+                      <Box key={productIndex}>
+                        <Typography level="body-md">{product.description}</Typography>
+                        <Typography level="body-sm">Price: {product.price} {product.currency}</Typography>
+                        <Typography level="body-sm">Quantity: {product.quantity}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              ))}
+      
+              <Link to="/">
+                <Button>Go shopping</Button>
+              </Link>
+            </>
+          ) : (
+            <div className="container_second">
+            <Typography level="body-lg">
+              You must log in to view your orders.
+            </Typography>
+            <Link to="/login">
+            <Button>LogIn</Button>
+            </Link>
+            </div>
+          )}
         </div>
       );
       

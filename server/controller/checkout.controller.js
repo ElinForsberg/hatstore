@@ -37,19 +37,31 @@ const verifyPayment = async (req,res) => {
         if(session.payment_status !== "paid") {
             return res.status(400).json({verified: false});
         }
-        const products = await stripe.checkout.sessions.listLineItems(session.id);
-        
+        const products = await stripe.checkout.sessions.listLineItems(req.body.sessionId);
+        const createdDate = new Date(session.created * 1000);
+        const formattedDate = createdDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true, // Use AM/PM
+
+    });
         const order = {
-            created: new Date(session.created * 1000), // Convert timestamp to date
+            created:formattedDate, // Convert timestamp to date
             customer: session.customer_details.name,
             email: session.customer_details.email,
-            totalSum: session.amount_total / 100,
+            totalSum: (parseFloat( session.amount_total) / 100).toFixed(2),
             products: products.data.map((item) => ({
               description: item.description,
               quantity: item.quantity,
-              price: item.price.unit_amount / 100, // Convert from cents to dollars
+              price: (parseFloat(item.price.unit_amount) / 100).toFixed(2),
+              
               currency: item.price.currency,
-              total: item.amount_total / 100
+              total: (parseFloat(item.amount_total) / 100).toFixed(2),
+               
             })),
         };
         console.log("ORDER", order)
