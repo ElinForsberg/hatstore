@@ -1,7 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import { useOrderContext } from "./OrderContext";
 
-
 interface IUserContext {
     loggedInUser?: User | null;
     setLoggedInUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -9,7 +8,6 @@ interface IUserContext {
     registerUser: (user:RegisterUser) => Promise<void>;
     isRegistered: boolean;
     setIsRegistered: React.Dispatch<React.SetStateAction<boolean>>;
-    // showAlert: () => void;
     loginAlert: boolean;
     setLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
     registerAlert: boolean;
@@ -27,136 +25,113 @@ interface User {
 
 export type UserType = {
     email: string;
-    password: string;
-    
+    password: string; 
 }
 
 export type RegisterUser= {
     username: string;
     password: string;
     email: string;
-    
 }
 
 const defaultValues = {
-loggedInUser: null,
-login: async () => {},
-registerUser: async () => {},
-setLoggedInUser: () => {},
-// showAlert: () => {},
-isRegistered: false,
-setIsRegistered: () => {},
-loginAlert: false,
-setLoginAlert: () => {},
-registerAlert: false,
-setRegisterAlert: () => {},
-logout: async () => {},
-authorization:() => {}
-
+    loggedInUser: null,
+    login: async () => {},
+    registerUser: async () => {},
+    setLoggedInUser: () => {},
+    isRegistered: false,
+    setIsRegistered: () => {},
+    loginAlert: false,
+    setLoginAlert: () => {},
+    registerAlert: false,
+    setRegisterAlert: () => {},
+    logout: async () => {},
+    authorization:() => {}
 }
 
+    const UserContext = createContext<IUserContext>(defaultValues);
+    export const useUser = () => useContext(UserContext);
 
-const UserContext = createContext<IUserContext>(defaultValues);
-
-export const useUser = () => useContext(UserContext);
-
-const UserProvider = ({children}: PropsWithChildren) => {
-    const [ loggedInUser, setLoggedInUser ] = useState<User | null>(null);
-    const [ isRegistered, setIsRegistered ] = useState(false);
-    const [loginAlert, setLoginAlert] = useState(false);
-    const [registerAlert, setRegisterAlert] = useState(false);
-    const {  getOrders } = useOrderContext();
+    const UserProvider = ({children}: PropsWithChildren) => {
+        const [ loggedInUser, setLoggedInUser ] = useState<User | null>(null);
+        const [ isRegistered, setIsRegistered ] = useState(false);
+        const [loginAlert, setLoginAlert] = useState(false);
+        const [registerAlert, setRegisterAlert] = useState(false);
+        const {  getOrders, setOrders } = useOrderContext();
 
 
     const authorization = async () => {
         try {
           const response = await fetch("/api/user/authorize");
           const data = await response.json();
-          if (response.status === 200 || response.status === 304) {
-            setLoggedInUser(data);
-            console.log(data);
-            
-          }
-   
-        } catch (err) {
+            if (response.status === 200 || response.status === 304) {
+                setLoggedInUser(data);
+             }
+         } catch (err) {
           console.log(err);
-        }
-      };
+         }
+     };
+
     useEffect(() => {
-        
         authorization();
       }, []);
 
-    async function login (user: UserType) {
-        if (user ) {
-            try {
-                const response = await fetch("/api/user/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(user)
-                });
-                const data = await response.json();
-
-                if(response.status === 200) {
-                    setLoggedInUser(data);
-                    console.log(data);
-                    getOrders();
-                }  else {
-                    setLoginAlert(true);
+         async function login (user: UserType) {
+             if (user ) {
+                try {
+                    const response = await fetch("/api/user/login", {
+                        method: "POST",
+                         headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(user)
+                    });
+                    const data = await response.json();
+                        if(response.status === 200) {
+                            setLoggedInUser(data);
+                            getOrders();
+                    }  else {
+                        setLoginAlert(true);
+                    }
+                } catch(err) {
+                    console.log(err);
                 }
-            } catch(err) {
-                console.log(err);
-                
             }
         }
-    }
 
-    async function registerUser (user: RegisterUser) {
-        if (user) {
-            try {
-                const response = await fetch("/api/user/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(user)
-                });
-                const data = await response.json();
-
-                if(response.status === 200) {
-                    setIsRegistered(true)
-                    // setLoggedInUser(data);
-                    console.log(data, "new customer is registred");
-                    
+            async function registerUser (user: RegisterUser) {
+                if (user) {
+                try {
+                    const response = await fetch("/api/user/register", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(user)
+                    });
+                    await response.json();
+                        if(response.status === 200) {
+                            setIsRegistered(true)    
                 } else {
-                    console.log("user already exist");
-                
-                    setRegisterAlert(true)
-                   
+                   setRegisterAlert(true)
                 }
-               
             } catch(err) {
                 console.log(err);
-        }
-    } 
-}
+                }
+            } 
+            }
 
 const logout = async () => {
-
     try {
       const response = await fetch("api/user/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
       if (response.status === 204) {
-        // setOrders([]);
         setLoggedInUser(null);
-        
+        setOrders([]);
       }
     } catch (err) {
       console.log(err);
@@ -165,26 +140,24 @@ const logout = async () => {
 
     return (
         <UserContext.Provider
-        value={{
-           login,
-           setLoggedInUser,
-           loggedInUser,
-           registerUser,
-           isRegistered,
-           setIsRegistered,
-           loginAlert,
-           setLoginAlert,
-           registerAlert,
-           setRegisterAlert,
-           logout,
-           authorization
-            
-        }}
+            value={{
+            login,
+            setLoggedInUser,
+            loggedInUser,
+            registerUser,
+            isRegistered,
+            setIsRegistered,
+            loginAlert,
+            setLoginAlert,
+            registerAlert,
+            setRegisterAlert,
+            logout,
+            authorization    
+            }}
         >
             {children}
         </UserContext.Provider>
     );
 };
-
 
 export default UserProvider;

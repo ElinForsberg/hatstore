@@ -359,5 +359,71 @@
         "total": "1159.20"
       }
     ]
+  },
+  {
+    "created": "Sep 20, 2023, 09:42:00 AM",
+    "customer": "Sixten",
+    "email": "sixten@hotmail.com",
+    "totalSum": "3397.00",
+    "products": [
+      {
+        "description": "BRIXTON JOANNA RANCHER",
+        "quantity": 1,
+        "price": "1249.00",
+        "currency": "sek",
+        "total": "1249.00"
+      },
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": "699.00",
+        "currency": "sek",
+        "total": "699.00"
+      },
+      {
+        "description": "STETSON ARIPEKA",
+        "quantity": 1,
+        "price": "1449.00",
+        "currency": "sek",
+        "total": "1449.00"
+      }
+    ]
+  },
+  {
+    "created": "Sep 20, 2023, 11:04:21 AM",
+    "customer": "anna",
+    "email": "anna@hotmail.com",
+    "totalSum": "1948.00",
+    "products": [
+      {
+        "description": "BRIXTON JOANNA RANCHER",
+        "quantity": 1,
+        "price": "1249.00",
+        "currency": "sek",
+        "total": "1249.00"
+      },
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 1,
+        "price": "699.00",
+        "currency": "sek",
+        "total": "699.00"
+      }
+    ]
+  },
+  {
+    "created": "Sep 20, 2023, 11:59:27 AM",
+    "customer": "anna",
+    "email": "anna@hotmail.com",
+    "totalSum": "1677.60",
+    "products": [
+      {
+        "description": "JAXON DETROIT TRILBY",
+        "quantity": 3,
+        "price": "699.00",
+        "currency": "sek",
+        "total": "1677.60"
+      }
+    ]
   }
 ]

@@ -1,7 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import { useUser} from "./UserContext";
 
-
 interface IProductContext {
     products: ProductData[];
     setProducts: React.Dispatch<React.SetStateAction<ProductData[]>>;
@@ -21,7 +20,6 @@ interface ProductData {
     id:string;
     product:string;
     price: ProductPrice;
-    
 }
 
 interface ProductPrice {
@@ -37,7 +35,6 @@ interface CartItem {
     price: string;
     currency: string;
     image: string;
-   
 }
 
 const defaultValues = {
@@ -47,11 +44,8 @@ const defaultValues = {
     handlePayment: () => {},
     cart: [],
     setCart: () => [],
-    addToCart: () => {},
-    
+    addToCart: () => {}, 
 }
-
-
 
 const ProductContext = createContext<IProductContext>(defaultValues);
 export const useProductContext = () => useContext(ProductContext);
@@ -62,15 +56,13 @@ const ProductProvider = ({children}: PropsWithChildren) => {
     const { loggedInUser } = useUser()
 
 
-    async function listProducts() {
-        
-        try {
-            const response = await fetch(
-                "/api/products"
-            );
-                const data = await response.json();
-                
-               const mappedProducts = data.data.map((product: ProductData) => ({
+        async function listProducts() {
+             try {
+                const response = await fetch(
+                    "/api/products"
+                );
+                const data = await response.json(); 
+                const mappedProducts = data.data.map((product: ProductData) => ({
                     name: product.name,
                     description: product.description,
                     product: product.default_price,
@@ -83,12 +75,9 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                     }
                 }));
                
-               
                 setProducts(mappedProducts);
-                console.log(data);
         }catch(err){
             console.log(err);
-            
         }
     }
 
@@ -110,24 +99,19 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                 );
           
                 if (!response.ok) {
-                  
                   return;
                 }
               const { url, sessionId } = await response.json();
               localStorage.setItem("session-id", sessionId);
               window.location = url;
-        } else {
-            console.log("you are not logged in");
-            
+        // } else {
+        //     console.log("you are not logged in");
         }
-    
-
     };
 
     function addToCart(productId: string, productName: string, productImage: string, productPrice: string, productCurrency: string) {
         // Check if the product is already in the cart
         const existingCartItem = cart.find((item) => item.product === productId);
-
         if (existingCartItem) {
             // If the product is already in the cart, update its quantity
             setCart((prevCart) =>
@@ -135,16 +119,11 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                     item.product === productId
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
-                )
-                
-                
-            );
-            console.log(cart);
-            
+                )  
+            ); 
         } else {
             // If the product is not in the cart, add it as a new item
             // const customer = loggedInUser?.id
-               
             setCart((prevCart) => [
                 ...prevCart,
                 {
@@ -155,30 +134,22 @@ const ProductProvider = ({children}: PropsWithChildren) => {
                     price: productPrice,
                     currency: productCurrency,   
                 },
-                
-                
             ]);
-            console.log(cart);
-            
         }
     }
 
-
-
 return (
     <ProductContext.Provider
-    value={{
-        products,
-        setProducts,
-        listProducts,
-        cart,
-        setCart,
-        handlePayment,
-        addToCart,
-        
-        
-    }}
-    >
+        value={{
+            products,
+            setProducts,
+            listProducts,
+            cart,
+            setCart,
+            handlePayment,
+            addToCart,
+         }}
+     >
         {children}
     </ProductContext.Provider>
 );
